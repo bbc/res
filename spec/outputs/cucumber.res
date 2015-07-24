@@ -1,9 +1,9 @@
 {
-  "started": "2015-03-18 21:54:17 +0000",
-  "finished": "2015-03-18 21:54:17 +0000",
+  "started": "2015-07-24 18:55:38 +0100",
+  "finished": "2015-07-24 18:55:38 +0100",
   "results": [
     {
-      "started": "2015-03-18 21:54:17 +0000",
+      "started": "2015-07-24 18:55:38 +0100",
       "file": "features/background_steps.feature",
       "line": 2,
       "urn": "features/background_steps.feature:2",
@@ -14,13 +14,9 @@
       "type": "Cucumber::Feature",
       "name": "Background steps",
       "description": "As a user\nI want to be able to use background steps",
-      "background": {
-        "type": "Background",
-        "name": "Do a number of background things"
-      },
       "children": [
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/background_steps.feature",
           "line": 12,
           "urn": "features/background_steps.feature:12",
@@ -59,10 +55,10 @@
             }
           ],
           "status": "passed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         },
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/background_steps.feature",
           "line": 17,
           "urn": "features/background_steps.feature:17",
@@ -96,13 +92,13 @@
             }
           ],
           "status": "passed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         }
       ],
-      "finished": "2015-03-18 21:54:17 +0000"
+      "finished": "2015-07-24 18:55:38 +0100"
     },
     {
-      "started": "2015-03-18 21:54:17 +0000",
+      "started": "2015-07-24 18:55:38 +0100",
       "file": "features/outlines.feature",
       "line": 2,
       "urn": "features/outlines.feature:2",
@@ -114,7 +110,7 @@
       "description": "As a user\nI want to be able to use Scenario Outlines\nAnd get reports on testing progress",
       "children": [
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/outlines.feature",
           "line": 9,
           "urn": "features/outlines.feature:9",
@@ -168,10 +164,10 @@
             }
           ],
           "description": "Given an <option> of some description\nWhen <something> happens\nThen the status should be reported\n| option | something |",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         },
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/outlines.feature",
           "line": 19,
           "urn": "features/outlines.feature:19",
@@ -210,13 +206,13 @@
             }
           ],
           "description": "Given something occurs\nWhen <something> happens\nAnd a non-parametised step throws an exception\nThen the result is a fail\n| something |",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         }
       ],
-      "finished": "2015-03-18 21:54:17 +0000"
+      "finished": "2015-07-24 18:55:38 +0100"
     },
     {
-      "started": "2015-03-18 21:54:17 +0000",
+      "started": "2015-07-24 18:55:38 +0100",
       "file": "features/result_statuses.feature",
       "line": 1,
       "urn": "features/result_statuses.feature:1",
@@ -225,7 +221,7 @@
       "description": "As a user\nI want to be able to detect various results",
       "children": [
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/result_statuses.feature",
           "line": 5,
           "urn": "features/result_statuses.feature:5",
@@ -244,10 +240,10 @@
             }
           ],
           "status": "passed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         },
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/result_statuses.feature",
           "line": 9,
           "urn": "features/result_statuses.feature:9",
@@ -267,10 +263,10 @@
             }
           ],
           "status": "failed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         },
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/result_statuses.feature",
           "line": 13,
           "urn": "features/result_statuses.feature:13",
@@ -295,13 +291,13 @@
             }
           ],
           "status": "failed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         }
       ],
-      "finished": "2015-03-18 21:54:17 +0000"
+      "finished": "2015-07-24 18:55:38 +0100"
     },
     {
-      "started": "2015-03-18 21:54:17 +0000",
+      "started": "2015-07-24 18:55:38 +0100",
       "file": "features/simple.feature",
       "line": 2,
       "urn": "features/simple.feature:2",
@@ -313,7 +309,7 @@
       "description": "As a user\nI want to be able to write simple features\nAnd get reports on testing progress",
       "children": [
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/simple.feature",
           "line": 8,
           "urn": "features/simple.feature:8",
@@ -341,13 +337,13 @@
             }
           ],
           "status": "failed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         }
       ],
-      "finished": "2015-03-18 21:54:17 +0000"
+      "finished": "2015-07-24 18:55:38 +0100"
     },
     {
-      "started": "2015-03-18 21:54:17 +0000",
+      "started": "2015-07-24 18:55:38 +0100",
       "file": "features/subdirs/simple.feature",
       "line": 2,
       "urn": "features/subdirs/simple.feature:2",
@@ -359,7 +355,7 @@
       "description": "As a user\nI want to be able to write simple features\nThat lives in a subdir",
       "children": [
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/subdirs/simple.feature",
           "line": 8,
           "urn": "features/subdirs/simple.feature:8",
@@ -387,13 +383,13 @@
             }
           ],
           "status": "failed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         }
       ],
-      "finished": "2015-03-18 21:54:17 +0000"
+      "finished": "2015-07-24 18:55:38 +0100"
     },
     {
-      "started": "2015-03-18 21:54:17 +0000",
+      "started": "2015-07-24 18:55:38 +0100",
       "file": "features/subdirs/subdirs/simple.feature",
       "line": 2,
       "urn": "features/subdirs/subdirs/simple.feature:2",
@@ -405,7 +401,7 @@
       "description": "As a user\nI want to be able to write simple features\nThat lives in an identically named subdir",
       "children": [
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/subdirs/subdirs/simple.feature",
           "line": 8,
           "urn": "features/subdirs/subdirs/simple.feature:8",
@@ -433,13 +429,13 @@
             }
           ],
           "status": "failed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         }
       ],
-      "finished": "2015-03-18 21:54:17 +0000"
+      "finished": "2015-07-24 18:55:38 +0100"
     },
     {
-      "started": "2015-03-18 21:54:17 +0000",
+      "started": "2015-07-24 18:55:38 +0100",
       "file": "features/tables.feature",
       "line": 2,
       "urn": "features/tables.feature:2",
@@ -451,7 +447,7 @@
       "description": "As a user\nI want to be able to write features using tables\nAnd ensure they are reported to the repository",
       "children": [
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/tables.feature",
           "line": 7,
           "urn": "features/tables.feature:7",
@@ -476,13 +472,13 @@
             }
           ],
           "status": "passed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         }
       ],
-      "finished": "2015-03-18 21:54:17 +0000"
+      "finished": "2015-07-24 18:55:38 +0100"
     },
     {
-      "started": "2015-03-18 21:54:17 +0000",
+      "started": "2015-07-24 18:55:38 +0100",
       "file": "features/tags.feature",
       "line": 2,
       "urn": "features/tags.feature:2",
@@ -494,7 +490,7 @@
       "description": "As a user\nI want to be able to write multiple scenarios",
       "children": [
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/tags.feature",
           "line": 7,
           "urn": "features/tags.feature:7",
@@ -522,10 +518,10 @@
             }
           ],
           "status": "failed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         },
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/tags.feature",
           "line": 13,
           "urn": "features/tags.feature:13",
@@ -552,13 +548,13 @@
             }
           ],
           "status": "passed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         }
       ],
-      "finished": "2015-03-18 21:54:17 +0000"
+      "finished": "2015-07-24 18:55:38 +0100"
     },
     {
-      "started": "2015-03-18 21:54:17 +0000",
+      "started": "2015-07-24 18:55:38 +0100",
       "file": "features/two_scenarios.feature",
       "line": 3,
       "urn": "features/two_scenarios.feature:3",
@@ -572,13 +568,9 @@
       "type": "Cucumber::Feature",
       "name": "Two scenarios in this feature",
       "description": "As a user\nI want to be able to write multiple scenarios",
-      "background": {
-        "type": "Background",
-        "name": "Set stuff up"
-      },
       "children": [
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/two_scenarios.feature",
           "line": 13,
           "urn": "features/two_scenarios.feature:13",
@@ -616,10 +608,10 @@
             }
           ],
           "status": "failed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         },
         {
-          "started": "2015-03-18 21:54:17 +0000",
+          "started": "2015-07-24 18:55:38 +0100",
           "file": "features/two_scenarios.feature",
           "line": 20,
           "urn": "features/two_scenarios.feature:20",
@@ -659,10 +651,10 @@
             }
           ],
           "status": "passed",
-          "finished": "2015-03-18 21:54:17 +0000"
+          "finished": "2015-07-24 18:55:38 +0100"
         }
       ],
-      "finished": "2015-03-18 21:54:17 +0000"
+      "finished": "2015-07-24 18:55:38 +0100"
     }
   ],
   "type": "Cucumber"

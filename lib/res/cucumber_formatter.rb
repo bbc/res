@@ -1,12 +1,11 @@
 # Formatter for ruby cucumber
 
 require 'fileutils'
+require 'res/ir'
 require 'cucumber/formatter/io'
-require 'testmite/ir'
-require 'pry'
 
-module Hive
-  class Cucumber
+module Res
+  class CucumberFormatter
     include FileUtils
     include Cucumber::Formatter::Io
 
@@ -31,12 +30,11 @@ module Hive
     # dump it as json
     def after_features(features)
       results = @_features
-      ir = ::Testmite::IR.new( :started     => @_start_time,
-                               :finished    => Time.now(),
-                               :results     => results,
-                               :type        => 'Cucumber' )
-      json = ir.json
-      @io.puts json
+      ir = ::Res::IR.new( :started     => @_start_time,
+                          :finished    => Time.now(),
+                          :results     => results,
+                          :type        => 'Cucumber' )
+      @io.puts ir.json
     end
 
     def before_feature(feature)
