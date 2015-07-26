@@ -5,9 +5,10 @@ require 'res/ir'
 require 'cucumber/formatter/io'
 
 module Res
-  class CucumberFormatter
+  module Formatters
+  class RubyCucumber
     include FileUtils
-    include Cucumber::Formatter::Io
+    include ::Cucumber::Formatter::Io
 
     def initialize(runtime, path_or_io, options)
       @runtime = runtime
@@ -282,5 +283,6 @@ module Res
         { :file => strings[0], :line => strings[2].to_i, :urn => uri }
       end
   
+  end
   end
 end

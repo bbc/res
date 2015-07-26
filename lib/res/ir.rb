@@ -33,15 +33,13 @@ module Res
       )
     end
 
-    # Count number of tests in specific state
-    # count(:passed)
-    def count(status)
-      
-    end
-    
     # Pluck out the actual test nodes from the contexts
     def tests
       IR.find_tests(results).flatten
+    end
+
+    def count(status)
+      tests.count { |t| t[:status].to_sym == status.to_sym  }
     end
 
     # Returns a simple array of test information
