@@ -1,7 +1,7 @@
-require 'testmite/ir'
+require 'res/ir'
 require 'json'
 
-EXAMPLE_FILE = 'spec/outputs/cucumber-ir.json'
+EXAMPLE_FILE = 'spec/outputs/cucumber.res'
 
 describe Res::IR do
 
@@ -21,6 +21,7 @@ describe Res::IR do
 
       it 'returns an array of just the test portions of the json' do
         expect(ir.tests).to be_a Array
+        expect(ir.tests.count).to eq 17
       end
 
       it 'only includes Scenarios and Scenario outline examples as tests' do
@@ -28,6 +29,20 @@ describe Res::IR do
         expect(node_types).to eq [ 'Cucumber::Scenario', 'Cucumber::ScenarioOutline::Example' ]
       end
       
+    end
+
+    describe "#count" do
+      it "Can pick out the passing tests from the run" do
+        expect(ir.count(:passed)).to eq 7
+      end
+
+      it "Can pick out the failing tests from the run" do
+        expect(ir.count(:failed)).to eq 10
+      end
+
+      it "Can identify there were no tests of an unknown type" do
+        expect(ir.count(:unknown)).to eq 0
+      end
     end
   end
 
