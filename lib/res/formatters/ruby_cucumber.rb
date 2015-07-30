@@ -173,8 +173,7 @@ module Res
         @_feature_element[:children] << @_step
         @_context = @_step
       end
-      
-    
+
     #  def before_step_result(keyword, step_match, multiline_arg, status, exception, source_indent, background, file_colon_line)
     #    @hide_this_step = false
     #    if exception
@@ -193,19 +192,18 @@ module Res
 
       # Argument list changed after cucumber 1.4, hence the *args
       def step_name(keyword, step_match, status, source_indent, background, *args)
-        
+
         file_colon_line = args[0] if args[0]
-        
+
         @_step[:type] = "Cucumber::Step"
         name = keyword + step_match.format_args(lambda{|param| %{#{param}}}) 
         @_step[:name] = name
         @_step[:status] = status
         #@_step[:background] = background
         @_step[:type] = "Cucumber::Step"
-        
+
       end
-      
-      
+
         #    def doc_string(string)
         #      return if @options[:no_multiline] || @hide_this_step
         #      s = %{"""\n#{string}\n"""}.indent(@indent)
@@ -218,13 +216,12 @@ module Res
       def exception(exception, status)
         @_context[:message] = exception.to_s
       end
-      
-    
+
       def before_multiline_arg(multiline_arg)
         #      return if @options[:no_multiline] || @hide_this_step
         #      @table = multiline_arg
       end
-      
+
       def after_multiline_arg(multiline_arg)
         @_context[:args] = multiline_arg.to_s.gsub(/\e\[(\d+)m/, '')
         @_table = nil
@@ -238,19 +235,19 @@ module Res
         @_outlines = @_feature_element[:children]
         @_table = []
       end
-        
+
       def after_outline_table(outline_table)
         headings = @_table.shift
         description = @_outlines.collect{ |o| o[:name] }.join("\n") + "\n" + headings[:name]
         @_feature_element[:children] = @_table
         @_feature_element[:description] = description
       end
-        
+
       def before_table_row(table_row)
         @_current_table_row = { :type => 'Cucumber::ScenarioOutline::Example' }
         @_table = [] if !@_table
       end
-        
+
       def after_table_row(table_row)
         if table_row.class == Cucumber::Ast::OutlineTable::ExampleRow
           @_current_table_row[:name] = table_row.name
@@ -266,23 +263,21 @@ module Res
           @_table << @_current_table_row
         end
       end
-        
+
       def after_table_cell(cell)
       end
-        
+
       def table_cell_value(value, status)
         @_current_table_row[:children] = [] if !@_current_table_row[:children]
         @_current_table_row[:children] << { :type => "Cucumber::ScenarioOutline::Parameter",
                                             :name => value, :status => status }
       end
 
-
-      #def self.split_uri(uri)
       def split_uri(uri)
         strings = uri.rpartition(/:/)
         { :file => strings[0], :line => strings[2].to_i, :urn => uri }
       end
-    
+
     end
   end
 end
