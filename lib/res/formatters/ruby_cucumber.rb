@@ -24,7 +24,7 @@ module Res
       def before_features(features)
         @_features = []
       end
-    
+
       # Once everything has run -- whack it in a ResultIR object and
       # dump it as json
       def after_features(features)
@@ -41,7 +41,7 @@ module Res
         @_context = {}
         @_feature[:started] = Time.now()
         begin
-          hash = split_uri( feature.location.to_s )
+          hash = RubyCucumber.split_uri( feature.location.to_s )
           @_feature[:file] = hash[:file]
           @_feature[:line] = hash[:line]
           @_feature[:urn]  = hash[:urn]
@@ -51,50 +51,45 @@ module Res
         @_features << @_feature
         @_context = @_feature
       end
-    
-      
+
       def comment_line(comment_line)
         @_context[:comments] = [] if !@_context[:comments]
         @_context[:comments] << comment_line 
       end
-      
-      
+
       def after_tags(tags)
       end
-    
-        
+
       def tag_name(tag_name)
         @_context[:tags] = [] if !@_context[:tag]
         # Strip @ from tags
         @_context[:tags] << tag_name[1..-1]
       end
-     
-     
+
       # { :type => 'Feature',
       #   :name => 'Feature name',
       #   :description => "As a blah\nAs a blah\n" }
       def feature_name(keyword, name)
         @_feature[:type] = "Cucumber::" + keyword.gsub(/\s+/, "")
-          
+
         lines = name.split("\n")
         lines = lines.collect { |l| l.strip }
-          
+
         @_feature[:name] = lines.shift
         @_feature[:description] = lines.join("\n")
       end
-      
+
       def after_feature(feature)
         @_feature[:finished] = Time.now()
       end
-       
-        
+
       def before_feature_element(feature_element)
-        
+
         @_feature_element = {}
         @_context = {}
         @_feature_element[:started] = Time.now
         begin
-          hash = split_uri( feature_element.location.to_s )
+          hash = RubyCucumber.split_uri( feature_element.location.to_s )
           @_feature_element[:file] = hash[:file]
           @_feature_element[:line] = hash[:line]
           @_feature_element[:urn] = hash[:urn]
@@ -103,45 +98,39 @@ module Res
           @_feature_element[:file] = 'unknown'
         end
 
-        
-        
         @_feature[:children] = [] if ! @_feature[:children]
-    
+
         @_feature[:children] << @_feature_element
         @_context = @_feature_element
       end
-      
+
       # After a scenario
       def after_feature_element(feature_element)
         @_context = {}
-        
+
         if feature_element.respond_to? :status
           @_feature_element[:status] = feature_element.status
         end
         @_feature_element[:finished] = Time.now
       end
-      
-      
+
       def before_background(background)
         #@_context[:background] = background
       end
-      
-      
+
       def after_background(background)
       end
-      
-      
+
       def background_name(keyword, name, file_colon_line, source_indent)
       end
-      
-      
+
         #    def before_examples_array(examples_array)
         #      @indent = 4
         #      @io.puts
         #      @visiting_first_example_name = true
         #    end
         #
-        
+
       def examples_name(keyword, name)
         #      @io.puts unless @visiting_first_example_name
         #      @visiting_first_example_name = false
@@ -153,21 +142,20 @@ module Res
         #      @scenario_indent = 6
       end
         #
-        
+
       def scenario_name(keyword, name, file_colon_line, source_indent)
         @_context[:type] = "Cucumber::" + keyword.gsub(/\s+/, "")
         @_context[:name] = name || ''
       end
-      
-      
+
       def before_step(step)
         @_step = {}
-        
+
         # Background steps can appear totally divorced from scenerios (feature
         # elements). Need to make sure we're not including them as children
         # to scenario that don't exist
         return if @_feature_element && @_feature_element[:finished]
-        
+
         @_feature_element = {} if !@_feature_element
         @_feature_element[:children] = [] if !@_feature_element[:children]
         @_feature_element[:children] << @_step
@@ -273,7 +261,7 @@ module Res
                                             :name => value, :status => status }
       end
 
-      def split_uri(uri)
+      def self.split_uri(uri)
         strings = uri.rpartition(/:/)
         { :file => strings[0], :line => strings[2].to_i, :urn => uri }
       end
