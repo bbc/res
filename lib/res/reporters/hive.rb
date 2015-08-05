@@ -4,19 +4,16 @@ module Res
   module Reporters
     class Hive
 
-      attr_accessor :url
+      def initialize( args = {} )
 
-      def initialize( args )
-        
-        url = args[:url] or raise "Need to provide a hive url"
-        
-        ::Hive::Messages.configure do |config|
-          config.base_path       = url
-          config.pem_file        = args[:cert]
-          config.ssl_verify_mode = args[:ssl_verify_mode] 
+        if args[:url]
+          ::Hive::Messages.configure do |config|
+            config.base_path       = args[:url]
+            config.pem_file        = args[:cert]
+            config.ssl_verify_mode = args[:ssl_verify_mode]
+          end
         end
-        
-        
+
       end
 
       def submit_results(ir, args)
