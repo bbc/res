@@ -1,6 +1,5 @@
 require 'ox'
 require 'json'
-require 'pry'
 
 module Res
   module Formatters
