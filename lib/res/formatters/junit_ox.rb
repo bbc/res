@@ -43,7 +43,7 @@ module Res
           if node.value == "testcase"
             suite[index] = Hash.new
             suite[index] = attach_cases(node)
-          else #if node.value == "testsuite"
+          else 
             suite[index] = Hash.new
             suite[index]["type"] = node.value
             suite[index]["name"] = node.attributes[:name]
@@ -58,7 +58,7 @@ module Res
       def get_res
         return @output.to_json
       end
-      
+
     end #class JUnit 
   end
 end
