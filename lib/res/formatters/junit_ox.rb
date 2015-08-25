@@ -50,7 +50,7 @@ module Res
             suite[index] = Hash.new
             suite[index]["type"] = "JUnit::" + node.value
             suite[index]["name"] = node.attributes[:name]
-            suite[index]["classname"] = node.attributes[:classname]
+            suite[index]["classname"] = node.attributes[:classname] if suite[index]["classname"] != nil
             suite[index]["children"] = attach_suite(node)
           end # if 
         index += 1
