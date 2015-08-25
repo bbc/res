@@ -1,10 +1,12 @@
 require 'ox'
 require 'json'
+require 'res/ir'
 
 module Res
   module Formatters
     class Junit
-      
+      attr_accessor  :ir, :io
+     
       def initialize(junit_xml)
         file = File.open(junit_xml, "rb") 
         begin
@@ -13,20 +15,22 @@ module Res
          raise "Invalid xunit XML format. Error: #{e}"
         end
         file.close
-        @output = Hash.new
-        @output["type"] = "Junit"
-        @output["started"] = ""
-        @output["finished"] = ""
-        @output["results"] = Array.new
         @result = Array.new
         @result = attach_suite(junit)
-        @output["results"] = @result
+        @ir = ::Res::IR.new( :type        => 'Junit', 
+                            :started     => "",
+                            :finished    => Time.now(),
+                            :results     => @result
+                            )
+        @io = File.open("./junit.res", "w")
+        @io.puts @ir.json
       end
 
       def attach_cases(node)
         testcase = Hash.new
-        testcase["type"] = node.value
+        testcase["type"] = "JUnit::" + node.value
         testcase["name"] = node.attributes[:name]
+        testcase["classname"] = node.attributes[:classname] if testcase["classname"] != nil
         testcase["duration"] = node.attributes[:time]
         testcase["status"] = "passed"
         if node.nodes[0] != nil
@@ -45,20 +49,16 @@ module Res
             suite[index] = attach_cases(node)
           else 
             suite[index] = Hash.new
-            suite[index]["type"] = node.value
+            suite[index]["type"] = "JUnit::" + node.value
             suite[index]["name"] = node.attributes[:name]
-            suite[index]["classname"] = node.attributes[:classname]
+            suite[index]["classname"] = node.attributes[:classname] if suite[index]["classname"] != nil
             suite[index]["children"] = attach_suite(node)
           end # if 
         index += 1
         end # each
         suite
       end # def attach_suite
+    end # class JUnit 
+  end # class Formatters
+end # class Res
 
-      def get_res
-        return @output.to_json
-      end
-
-    end #class JUnit 
-  end
-end
