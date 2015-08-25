@@ -1,10 +1,12 @@
 require 'ox'
 require 'json'
+require 'res/ir'
 
 module Res
   module Formatters
     class Junit
-      
+      attr_accessor  :ir, :io
+     
       def initialize(junit_xml)
         file = File.open(junit_xml, "rb") 
         begin
@@ -13,14 +15,15 @@ module Res
          raise "Invalid xunit XML format. Error: #{e}"
         end
         file.close
-        @output = Hash.new
-        @output["type"] = "Junit"
-        @output["started"] = ""
-        @output["finished"] = ""
-        @output["results"] = Array.new
         @result = Array.new
         @result = attach_suite(junit)
-        @output["results"] = @result
+        @ir = ::Res::IR.new( :type        => 'Junit', 
+                            :started     => "",
+                            :finished    => Time.now(),
+                            :results     => @result
+                            )
+        @io = File.open("./junit.res", "w")
+        @io.puts @ir.json
       end
 
       def attach_cases(node)
@@ -54,11 +57,8 @@ module Res
         end # each
         suite
       end # def attach_suite
+    end # class JUnit 
+  end # class Formatters
+end # class Res
 
-      def get_res
-        return @output.to_json
-      end
 
-    end #class JUnit 
-  end
-end
