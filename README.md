@@ -80,19 +80,19 @@ Your file should be called .test_rail.yaml, and looks like this:
     project:   'iPlayer Android'
     suite:     'Features'
 
-Note: PostResult no longer picks a project and suite name for you if you don't 
+Note: Res does not pick a project and suite name for you if you don't 
 define one.
 
 When submitting results, you will need to provide your testrail run id
 that you want your results to be reported against or a name and description
-if you want post_result to create a run for you.
+if you want Res to create a run for you.
 
 You will also need to provide a version string, this is a text string for
 identifting the thing you're testing (e.g. a tag or revision number).
 
 #### Tags
 
-PostResult lets you synchronise your cucumber tags with testrail. The default
+Res lets you synchronise your cucumber tags with testrail. The default
 behaviour matches tags to case types and priorities. For example, if you tag a
 scenario: @automated, and you have an 'Automated' test case type in testrail,
 the 'Automated' case type will be selected for that scenario.
@@ -124,7 +124,7 @@ results for an individual run by doing:
 
     TEST_RAIL_RUN_ID=22 VERSION='v1.2.3' bundle exec cucumber -f TestRail::Submit
     
-You can get post_result to create a run for you by providing a run name and
+You can get Res to create a run for you by providing a run name and
 optional run description:
 
     TEST_RAIL_RUN_NAME='ci run #1' TEST_RAIL_RUN_DESCRIPTION='RC Test run overnights \
