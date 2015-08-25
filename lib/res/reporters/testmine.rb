@@ -2,16 +2,28 @@ module Res
   module Reporters
     class Testmine
 
-      attr_accessor :url
+      attr_accessor :url, :config
 
       def initialize(args)
-        url = args[:url]
+        @url = args[:url]
+        @config = Res::Config.new([:project, :component, :suite, :version, :url, :target, :testmine_url])
+        config.populate(args)
       end
 
       def submit_results(ir, args)
+        
+        # Set missing project information
+        ir.project = config.project
+        ir.suite   = config.suite
+        
+        # Load world information into json hash
+        ir.world = {
+          :project   => @config.project,
+          :component => @config.component,
+          :version   => @config.version
+        }
 
-       # TODO, load in the tesmime config and merge it into the json hash
-
+        # Submit to testmine
         uri = URI.parse(url)
         net = Net::HTTP.new(uri.host, uri.port)
         request = Net::HTTP::Post.new("/api/v1/submit")
