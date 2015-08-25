@@ -26,7 +26,7 @@ describe Res::IR do
 
       it 'only includes Testcase as tests' do
         node_types = ir.tests.collect { |t| t[:type] }.uniq!
-        expect(node_types).to eq [ 'testcase' ]
+        expect(node_types).to eq [ 'JUnit::testcase' ]
       end
       
     end
