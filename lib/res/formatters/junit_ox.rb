@@ -30,6 +30,7 @@ module Res
         testcase = Hash.new
         testcase["type"] = "JUnit::" + node.value
         testcase["name"] = node.attributes[:name]
+        testcase["classname"] = node.attributes[:classname] if testcase["classname"] != nil
         testcase["duration"] = node.attributes[:time]
         testcase["status"] = "passed"
         if node.nodes[0] != nil
