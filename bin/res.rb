@@ -52,6 +52,21 @@ class CLIParser
         options.job_id = job_id
       end
 
+      opts.on("--config-file CONFIG_FILE",
+              "Config file for the submitter") do |config_file|
+        options.config_file = config_file
+      end
+
+      opts.on("--version VERSION",
+              "VERSION of the world under test") do |config_file|
+        options.config_file = config_file
+      end
+      
+      opts.on("--target TARGET",
+              "Target of execution (e.g. Chrome)") do |config_file|
+        options.config_file = config_file
+      end
+
 
     end
 
@@ -84,6 +99,15 @@ if options.reporter
     )
     
     reporter.submit( ir, :job_id => options.job_id )
+  when 'testmine'
+    
+    reporter = Res::Reporter::Testmine.new(
+      :config_file => options.config_file,
+      :version     => options.version,
+      :target      => options.target
+    )
+    
+    testmine.submit_results(ir)
     
   else
     raise "#{options.reporter} not implemented"
