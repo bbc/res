@@ -28,7 +28,7 @@ module Res
 
       def attach_cases(node)
         testcase = Hash.new
-        testcase["type"] = node.value
+        testcase["type"] = "JUnit::" + node.value
         testcase["name"] = node.attributes[:name]
         testcase["duration"] = node.attributes[:time]
         testcase["status"] = "passed"
@@ -48,7 +48,7 @@ module Res
             suite[index] = attach_cases(node)
           else 
             suite[index] = Hash.new
-            suite[index]["type"] = node.value
+            suite[index]["type"] = "JUnit::" + node.value
             suite[index]["name"] = node.attributes[:name]
             suite[index]["classname"] = node.attributes[:classname]
             suite[index]["children"] = attach_suite(node)
@@ -60,5 +60,4 @@ module Res
     end # class JUnit 
   end # class Formatters
 end # class Res
-
 
