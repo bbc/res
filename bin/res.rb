@@ -83,7 +83,7 @@ if options.reporter
       :ssl_verify_mode => options.ssl_verify_mode
     )
     
-    p reporter.submit( ir, :job_id => options.job_id )
+    reporter.submit( ir, :job_id => options.job_id )
     
   else
     raise "#{options.reporter} not implemented"
