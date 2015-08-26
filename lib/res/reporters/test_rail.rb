@@ -2,12 +2,13 @@ require 'test_rail'
 
 module Res
   module Reporters
-    class TestRail
+    class TestRailR
 
       attr_accessor :ir, :suite, :case, :case_status
-      def initialize(json)
+      def initialize(res_file)
         i = 0
         @case_status = {}
+        json = File.read(res_file)
         @ir = JSON.parse(json, :symbolize_names => true)
         
         # @io = io
@@ -93,7 +94,7 @@ module Res
             tcase = @tr.add_case(:section_id => parent_id, :title => child[:name])
             @case_status[:"#{tcase.id}"] = child[:status]
           else
-            # To be added Ex: steps 
+            # To be added. Ex: steps 
           end # if
         end # each
       end # sync_results
