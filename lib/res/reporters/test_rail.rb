@@ -6,7 +6,7 @@ module Res
   module Reporters
     class TestRailR
 
-      attr_accessor :ir, :suite, :case, :case_status
+      attr_accessor :ir, :case_status
       def initialize(res_file)
         i = 0
         @case_status = {}
