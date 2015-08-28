@@ -31,9 +31,9 @@ module Res
       end # initialize
 
       def tr
-        @tr = TestRail::API.new( :user  => "testrail@example.com",
-                                 :password  => "g0ne8ang",
-                                 :namespace => "bbcsandbox" )
+        @tr = TestRail::API.new( :user  => "user",
+                                 :password  => "password",
+                                 :namespace => "namespace" )
       end
 
       # Add status to each testcase
