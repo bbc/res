@@ -8,16 +8,16 @@ module Res
 			set_type
 		end
 
-	 	def set_type
-      case type
-      when "Junit"
-        @context = ["JUnit::testsuite", "JUnit::testsuites"]
-        @case = ["JUnit::testcase"]      
-      when "Cucumber"
-        @context = ["Cucumber::Feature", "Cucumber::ScenarioOutline"]
-        @case = ["Cucumber::Scenario"]
-      end
-    end
+		def set_type
+			case @type
+			when "Junit"
+				@context = ["JUnit::testsuite", "JUnit::testsuites"]
+				@case = ["JUnit::testcase"]      
+			when "Cucumber"
+				@context = ["Cucumber::Feature", "Cucumber::ScenarioOutline"]
+				@case = ["Cucumber::Scenario"]
+			end
+		end
 
 	end
 end
