@@ -12,7 +12,7 @@ jasmineStarted: function(suiteInfo) {
 },
 
 suiteStarted: function(result) {
-# suite object initialization
+// suite object initialization
   this.suite_info[this.suite_count] = result;
   this.suite_info[this.suite_count]["started"] = new Date().toUTCString();
   this.suite_count++;
