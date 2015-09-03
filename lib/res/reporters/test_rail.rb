@@ -50,7 +50,7 @@ module Res
       end
 
       def get_project(project_name)
-        project = tr.find_project(:name => project_name)
+        project = @tr.find_project(:name => project_name)
         project.id
       end
 
