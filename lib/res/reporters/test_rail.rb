@@ -1,7 +1,7 @@
 require 'test_rail'
 require 'res/ir'
 require 'res/mappings'
-require 'pry'
+
 module Res
   module Reporters
     class TestRail
