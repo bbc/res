@@ -33,7 +33,8 @@ module Res
       def submit_results(args)
         suite = @project.find_suite(:name => @suite_name)
         raise "Couldn't find suite with name #{@suite_name}" if suite.nil?
-        run_id = add_test_run(@project.id, suite.id)
+        # run_id = args[:run_id]
+        run_id = add_test_run(@project.id, suite.id) if run_id != nil
         i = 0
         if !@case_status.empty?
           while i < @ir.results.count
@@ -47,9 +48,9 @@ module Res
       end
 
       def tr
-        @tr = ::TestRail::API.new( :user => "user",
-                                  :password => "password",
-                                  :namespace => "namespace" )
+        @tr = ::TestRail::API.new( :user  => "testrail@example.com",
+                                 :password  => "g0ne8ang",
+                                 :namespace => "bbcsandbox")
       end
 
       # Add status to each testcase
