@@ -7,7 +7,6 @@ module Res
     def self.load(file)
       f = File.open file
       hash = JSON.load(f, nil, :symbolize_names => true )
-      
       Res::IR.new( hash )
     end  
    
