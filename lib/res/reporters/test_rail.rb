@@ -1,7 +1,7 @@
 require 'test_rail'
 require 'res/ir'
 require 'res/mappings'
-
+require 'pry'
 module Res
   module Reporters
     class TestRail
@@ -33,9 +33,9 @@ module Res
       def submit_results(args)
         suite = @project.find_suite(:name => @suite_name)
         raise "Couldn't find suite with name #{@suite_name}" if suite.nil?
-        run_id = args[:run_id] 
-        run = @tr.get_run(:run_id => run_id) if run_id != nil
-        run = add_test_run(@project.id, suite.id) if run_id == nil
+        run_id = args[:run_id]
+        # run = @tr.get_run(:run_id => run_id) if run_id != nil
+        run_id = add_test_run(@project.id, suite.id) if run_id == nil
         i = 0
         if @case_status.empty?
           while i < @ir.results.count
@@ -45,13 +45,13 @@ module Res
             i += 1
           end # while
         end # if
-        add_case_status(run)
+       add_case_status(run_id)
       end
 
       def tr
         @tr = ::TestRail::API.new( :user => "user",
-                                  :password => "password",
-                                  :namespace => "namespace")
+                                 :password  => "passw0rd",
+                                 :namespace => "namespace")
       end
 
       # Add status to each testcase
