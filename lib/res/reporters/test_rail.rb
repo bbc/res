@@ -34,7 +34,7 @@ module Res
         suite = @project.find_suite(:name => @suite_name)
         raise "Couldn't find suite with name #{@suite_name}" if suite.nil?
         # run_id = args[:run_id] 
-        run_id = add_test_run(@project.id, suite.id) if run_id != nil
+        run_id = add_test_run(@project.id, suite.id) #if run_id != nil
         i = 0
         if !@case_status.empty?
           while i < @ir.results.count
