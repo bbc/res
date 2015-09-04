@@ -25,7 +25,7 @@ module Res
         i = 0
           while i < @ir.results.count         
             section = suite.find_or_create_section(:project_id => @project.id, :suite_id => suite.id, :name => @ir.results[i][:name])   
-            sync_results(@ir.results[i], @project.id, suite, section)
+            create_suite(@ir.results[i], @project.id, suite, section)
             i += 1
           end # while
       end
@@ -67,11 +67,11 @@ module Res
       end
 
       # Add section or cases within parent section
-      def sync_results(ir, project_id, suite, parent)
+      def create_suite(ir, project_id, suite, parent)
         ir[:children].each do |child|
           if @mappings.context.include?(child[:type])
             section = parent.find_or_create_section(:project_id => project_id, :suite_id => suite.id, :name => child[:name])   
-            sync_results(child, project_id, suite, section) if child[:children].count > 0
+            create_suite(child, project_id, suite, section) if child[:children].count > 0
           elsif @mappings.case.include?(child[:type])
             parent = suite if parent == nil  
             tcase = parent.find_or_create_test_case(:title => child[:name])
@@ -80,7 +80,7 @@ module Res
             # To be added. Ex: steps 
           end # if
         end # each
-      end # sync_results
+      end # create_suite
 
 
       def case_details(ir, section)
