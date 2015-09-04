@@ -14,7 +14,7 @@ module Res
         @mappings = Res::Mappings.new(@ir.type)
         project_name = 'bbc-test/post_result'
         @suite_name = "Jasmine"
-
+        
         @project = tr.find_project(:name => project_name)
         raise "Couldn't find project with name #{project_name}" if @project.nil?
       end # initialize
@@ -33,10 +33,11 @@ module Res
       def submit_results(args)
         suite = @project.find_suite(:name => @suite_name)
         raise "Couldn't find suite with name #{@suite_name}" if suite.nil?
-        # run_id = args[:run_id] 
-        run_id = add_test_run(@project.id, suite.id) #if run_id != nil
+        run_id = args[:run_id] 
+        run = @tr.get_run(:run_id => run_id) if run_id != nil
+        run = add_test_run(@project.id, suite.id) if run_id == nil
         i = 0
-        if !@case_status.empty?
+        if @case_status.empty?
           while i < @ir.results.count
             section = suite.find_section(:name => @ir.results[i][:name])
             raise "Couldn't find section with name #{@ir.results[i][:name]}" if section.nil?
@@ -44,13 +45,13 @@ module Res
             i += 1
           end # while
         end # if
-        add_case_status(run_id)
+        add_case_status(run)
       end
 
       def tr
-        @tr = ::TestRail::API.new( :user  => "user",
-                                 :password  => "passw0rd",
-                                 :namespace => "namespace")
+        @tr = ::TestRail::API.new( :user => "user",
+                                  :password => "password",
+                                  :namespace => "namespace")
       end
 
       # Add status to each testcase
@@ -89,7 +90,7 @@ module Res
               section = section.find_section(:name => child[:name])   
               case_details(child, section)
           elsif @mappings.case.include?(child[:type])  
-              tcase = section.find_test_case(:title => child[:name]) if !section.nil? 
+              tcase = section.find_test_case(:title => child[:name])  if !section.nil?
               @case_status[:"#{tcase.id}"] = child[:status] if !tcase.nil?
           end
         end
