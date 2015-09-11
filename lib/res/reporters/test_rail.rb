@@ -12,10 +12,10 @@ module Res
         
         @ir = Res::IR.load(json)
         @mappings = Res::Mappings.new(@ir.type)
-        project_name = 'bbc-test/post_result'
+        test_rail_project = 'bbc-test/post_result'
         @suite_name = "Jasmine"
         
-        @project = tr.find_project(:name => project_name)
+        @project = tr.find_project(:name => test_rail_project)
         raise "Couldn't find project with name #{project_name}" if @project.nil?
       end # initialize
 
