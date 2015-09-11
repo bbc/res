@@ -1,16 +1,16 @@
 require 'test_rail'
 require 'res/ir'
 require 'res/mappings'
-require 'pry'
+
 module Res
   module Reporters
     class TestRail
 
       attr_accessor :ir, :case_status
-      def initialize(res_file)
+      def initialize(json)
         @case_status = {}
         
-        @ir = Res::IR.load(res_file)
+        @ir = Res::IR.load(json)
         @mappings = Res::Mappings.new(@ir.type)
         project_name = 'bbc-test/post_result'
         @suite_name = "Jasmine"
@@ -19,7 +19,7 @@ module Res
         raise "Couldn't find project with name #{project_name}" if @project.nil?
       end # initialize
 
-
+      # Creates a new suite within testrail
       def sync_tests(args = {})
         suite = @project.find_or_create_suite(:name => @suite_name, :id => @project.id)
         i = 0
@@ -30,8 +30,11 @@ module Res
           end # while
       end
 
+      # Submits run against suite
+      # Either creates a new run or use existing run_id 
       def submit_results(args)
         suite = @project.find_suite(:name => @suite_name)
+        # sync_tests("test") if suite.nil?
         raise "Couldn't find suite with name #{@suite_name}" if suite.nil?
         run_id = args[:run_id]
         run_id = add_test_run(@project.id, suite.id) if run_id == nil
