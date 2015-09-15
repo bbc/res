@@ -9,7 +9,7 @@ module Res
       attr_accessor :ir, :case_status
       def initialize(json)
         @case_status = {}
-        @io = File.new("lib/res/a.txt","w+")
+        @io = File.new("lib/res/a.txt","w+") # Need to specify file path. This is temporary.
         @ir = Res::IR.load(json)
         @mappings = Res::Mappings.new(@ir.type)
         test_rail_project = 'bbc-test/post_result'
