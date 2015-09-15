@@ -9,18 +9,23 @@ module Res
       attr_accessor :ir, :case_status
       def initialize(json)
         @case_status = {}
-        
+        @io = File.new("lib/res/a.txt","w+")
         @ir = Res::IR.load(json)
         @mappings = Res::Mappings.new(@ir.type)
         test_rail_project = 'bbc-test/post_result'
         @suite_name = "Jasmine"
-        
-        @project = tr.find_project(:name => test_rail_project)
-        raise "Couldn't find project with name #{project_name}" if @project.nil?
+        begin
+          @project = tr.find_project(:name => test_rail_project)
+        rescue
+          @io.puts "Project: #{test_rail_project} could not be found" 
+          @io.puts "  Please create a project first to contain test suite #{@suite_name}"
+          return
+        end
       end # initialize
 
       # Creates a new suite within testrail
       def sync_tests(args = {})
+        @io.puts "Syncing Suite"
         suite = @project.find_or_create_suite(:name => @suite_name, :id => @project.id)
         i = 0
           while i < @ir.results.count         
@@ -28,32 +33,52 @@ module Res
             create_suite(@ir.results[i], @project.id, suite, section)
             i += 1
           end # while
+        @synced = true
+        @io.puts "> Sync Successful"
       end
 
       # Submits run against suite
-      # Either creates a new run or use existing run_id 
+      # Either creates a new run using run_name or use existing run_id 
       def submit_results(args)
         suite = @project.find_suite(:name => @suite_name)
-        # sync_tests("test") if suite.nil?
-        raise "Couldn't find suite with name #{@suite_name}" if suite.nil?
-        run_id = args[:run_id]
-        run_id = add_test_run(@project.id, suite.id) if run_id == nil
+        sync_tests if !@synced
+        
+        if args[:run_id]
+          run_id = args[:run_id]
+            begin
+              run = @tr.get_run(:run_id => run_id)
+              @io.puts "> Found run with id #{run_id}"
+            rescue
+              @io.puts "> Couldn't find run with id #{run_id}"
+              return
+            end
+        elsif args[:run_name]
+          run_name = args[:run_name]
+          @io.puts "> Created new run with name #{run_}"
+          run_id = @tr.add_run( :project_id => @project.id, :name => run_name, :description => args[:run_description], :suite_id => suite.id ).id
+          @io.puts "> Created new run: #{run_id}"
+        end
+
         i = 0
         if @case_status.empty?
           while i < @ir.results.count
-            section = suite.find_section(:name => @ir.results[i][:name])
-            raise "Couldn't find section with name #{@ir.results[i][:name]}" if section.nil?
+            begin
+              section = suite.find_section(:name => @ir.results[i][:name])
+            rescue 
+              @io.puts "> Couldn't find section with name #{@ir.results[i][:name]}" 
+            end
             case_details(@ir.results[i], section)
             i += 1
           end # while
-        end # if
-       add_case_status(run_id)
+        end # ifa
+        add_case_status(run_id)
+        @io.puts "> Added the test case status"
       end
 
       def tr
-        @tr = ::TestRail::API.new( :user => "user",
-                                 :password  => "passw0rd",
-                                 :namespace => "namespace")
+        @tr = ::TestRail::API.new( :user  => "testrail@example.com",
+                                 :password  => "g0ne8ang",
+                                 :namespace => "bbcsandbox")
       end
 
       # Add status to each testcase
@@ -63,12 +88,6 @@ module Res
         }
       end
 
-      # Add New Test run
-      def add_test_run(project_id, suite_id)
-        run = @tr.add_run(:project_id => project_id, :suite_id => suite_id, :name => "run_name", :description => "#{@ir.type}_#{Time.now}")
-        run.id
-      end
-
       # Add section or cases within parent section
       def create_suite(ir, project_id, suite, parent)
         ir[:children].each do |child|
@@ -76,7 +95,7 @@ module Res
             section = parent.find_or_create_section(:project_id => project_id, :suite_id => suite.id, :name => child[:name])   
             create_suite(child, project_id, suite, section) if child[:children].count > 0
           elsif @mappings.case.include?(child[:type])
-            parent = suite if parent == nil  
+            parent = suite if parent.nil?   
             tcase = parent.find_or_create_test_case(:title => child[:name])
             @case_status[:"#{tcase.id}"] = child[:status]
           else
@@ -84,7 +103,6 @@ module Res
           end # if
         end # each
       end # create_suite
-
 
       def case_details(ir, section)
         ir[:children].each do |child|
