@@ -116,7 +116,7 @@ if options.reporter
     )
     
     id = reporter.submit_results(ir)
-    puts "Reported to testrail: #{id}"
+    puts "Reported to testmine: #{id}"
   else
     raise "#{options.reporter} not implemented"
   end
