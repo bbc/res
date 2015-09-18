@@ -3,6 +3,7 @@ require 'json'
 module Res
   class IR
     attr_accessor :hash, :results, :type, :start_time, :end_time, :world
+    attr_accessor :project, :suite, :target
  
     def self.load(file)
       f = File.open file
