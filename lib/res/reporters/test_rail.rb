@@ -10,10 +10,7 @@ module Res
       attr_accessor :ir, :case_status, :config, :project, :suite
       def initialize(args)
         @url = args[:url]
-        # @config = Res::Config.new([:user, :password, :namespace, :project, :suite, :run_id], [:run_name])
-        # @config = Res::Config.new([:user, :password, :namespace, :project, :suite, :run_id, :run_name], "test_rail_")
-        # @config = Res::Config.new([:user, :password, :namespace, :project, :suite, :run_id])
-        @config = Res::Config.new([:user, :password, :namespace, :project, :suite], :optional => [:run_id, :run_name], :pre_env => 'test_rail_')
+        @config = Res::Config.new([:user, :password, :namespace, :project, :suite], :optional => [:run_id, :run_name], :pre_env => 'test_rail')
         config.process(args)
 
         @case_status = {}
@@ -51,17 +48,20 @@ module Res
 
       # Submits run against suite
       # Either creates a new run using run_name or use existing run_id 
-      def submit_results(args)
+      def submit_results(args = {})
         sync_tests(args) if !@synced
         suite = @project.find_suite(:name => @suite_name)
 
-        if !@config.run_name.nil? 
+        run_name = @config.run_name || args[:run_name] || nil
+        run_id = @config.run_id || args[:run_id] || nil
+
+        if !run_name.nil? 
           run_name = @config.run_name 
           @io.puts "> Created new run with name #{run_name}"
           run_id = @tr.add_run( :project_id => @project.id, :name => run_name, :description => args[:run_description], :suite_id => suite.id ).id
           @io.puts "> Created new run: #{run_id}"
         
-        elsif !@config.run_id.nil? 
+        elsif !run_id.nil? 
           run_id = @config.run_id 
             begin
               run = @tr.get_run(:run_id => @config.run_id) 
@@ -70,9 +70,11 @@ module Res
               @io.puts "> Couldn't find run with id #{run_id}"
               return "Couldn't find run with id #{run_id}"           
             end
+
         else
           @io.puts "> run_name and run_id are either nil or not specified"
           return "run_name and run_id are either nil or not specified"          
+
         end
 
         i = 0
@@ -113,10 +115,12 @@ module Res
           if @mappings.context.include?(child[:type])
             section = parent.find_or_create_section(:project_id => project_id, :suite_id => suite.id, :name => child[:name])   
             create_suite(child, project_id, suite, section) if child[:children].count > 0
+
           elsif @mappings.case.include?(child[:type])
             parent = suite if parent.nil?   
             tcase = parent.find_or_create_test_case(:title => child[:name])
             @case_status[:"#{tcase.id}"] = child[:status]
+
           else
             # To be added. Ex: steps 
           end # if
@@ -128,9 +132,11 @@ module Res
           if @mappings.context.include?(child[:type])
               section = section.find_section(:name => child[:name])   
               case_details(child, section)
+
           elsif @mappings.case.include?(child[:type])  
               tcase = section.find_test_case(:title => child[:name])  if !section.nil?
               @case_status[:"#{tcase.id}"] = child[:status] if !tcase.nil?
+
           end
         end
       end
