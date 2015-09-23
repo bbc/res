@@ -1,20 +1,25 @@
 require 'test_rail'
 require 'res/ir'
 require 'res/mappings'
+require 'res/config'
 
 module Res
   module Reporters
     class TestRail
+      
+      attr_accessor :ir, :case_status, :config, :project, :suite
+      def initialize(args)
+      	@url = args[:url]
+        @config = Res::Config.new([:user, :password, :namespace, :project, :suite, :run_id, :run_name], "test_rail_")
+        config.process(args)
 
-      attr_accessor :ir, :case_status
-      def initialize(json)
         @case_status = {}
-        @io = File.new("lib/res/a.txt","w+") # Need to specify file path. This is temporary.
-        @ir = Res::IR.load(json)
-        @mappings = Res::Mappings.new(@ir.type)
-        test_rail_project = 'bbc-test/post_result'
-        @suite_name = "Jasmine"
-        begin
+        @io = File.new("./.test_rail_reporter.log","w+") 
+      
+        test_rail_project = config.project
+        @suite_name = config.suite 
+  
+       begin
           @project = tr.find_project(:name => test_rail_project)
         rescue
           @io.puts "Project: #{test_rail_project} could not be found" 
@@ -24,7 +29,10 @@ module Res
       end # initialize
 
       # Creates a new suite within testrail
-      def sync_tests(args = {})
+      def sync_tests(args)
+      	@ir = args[:ir]
+        @mappings = Res::Mappings.new(@ir.type)
+
         @io.puts "Syncing Suite"
         suite = @project.find_or_create_suite(:name => @suite_name, :id => @project.id)
         i = 0
@@ -40,23 +48,27 @@ module Res
       # Submits run against suite
       # Either creates a new run using run_name or use existing run_id 
       def submit_results(args)
+        sync_tests(args) if !@synced
         suite = @project.find_suite(:name => @suite_name)
-        sync_tests if !@synced
+
+ 		if @config.struct.to_h.has_key?(:run_name) # and !@config.run_name.nil? 
+          run_name = @config.run_name 
+          @io.puts "> Created new run with name #{run_name}"
+          run_id = @tr.add_run( :project_id => @project.id, :name => run_name, :description => args[:run_description], :suite_id => suite.id ).id
+          @io.puts "> Created new run: #{run_id}"
         
-        if args[:run_id]
-          run_id = args[:run_id]
+        elsif @config.struct.to_h.has_key?(:run_id) # and !@config.run_id.nil? 
+          run_id = @config.run_id 
             begin
-              run = @tr.get_run(:run_id => run_id)
+              run = @tr.get_run(:run_id => @config.run_id) 
               @io.puts "> Found run with id #{run_id}"
             rescue
               @io.puts "> Couldn't find run with id #{run_id}"
               return
             end
-        elsif args[:run_name]
-          run_name = args[:run_name]
-          @io.puts "> Created new run with name #{run_}"
-          run_id = @tr.add_run( :project_id => @project.id, :name => run_name, :description => args[:run_description], :suite_id => suite.id ).id
-          @io.puts "> Created new run: #{run_id}"
+        else
+        	@io.puts "> run_name and run_id are either nil or not specified"
+        	return
         end
 
         i = 0
@@ -73,12 +85,13 @@ module Res
         end # ifa
         add_case_status(run_id)
         @io.puts "> Added the test case status"
+        @io.puts "> Submit Successful"
       end
 
       def tr
-        @tr = ::TestRail::API.new( :user  => "testrail@example.com",
-                                 :password  => "g0ne8ang",
-                                 :namespace => "bbcsandbox")
+      	@tr = ::TestRail::API.new( :user      => @config.user,
+                             		:password  => @config.password,
+                             		:namespace => @config.namespace) 
       end
 
       # Add status to each testcase
@@ -117,5 +130,5 @@ module Res
       end
 
     end # TestRail
-  end # Reporters
+ end # Reporters
 end # Res
