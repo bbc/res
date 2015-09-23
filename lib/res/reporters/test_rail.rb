@@ -34,8 +34,9 @@ module Res
         @ir = args[:ir]
         @mappings = Res::Mappings.new(@ir.type)
 
-        @io.puts "Syncing Suite"
         suite = @project.find_or_create_suite(:name => @suite_name, :id => @project.id)
+        @io.puts "Syncing Suite"
+        
         i = 0
           while i < @ir.results.count         
             section = suite.find_or_create_section(:project_id => @project.id, :suite_id => suite.id, :name => @ir.results[i][:name])   
