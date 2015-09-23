@@ -24,6 +24,7 @@ module Res
         rescue
           @io.puts "Project: #{test_rail_project} could not be found" 
           @io.puts "  Please create a project first to contain test suite #{@suite_name}"
+          puts "Project #{test_rail_project} could not be found"
           return
         end
       end # initialize
@@ -64,10 +65,12 @@ module Res
               @io.puts "> Found run with id #{run_id}"
             rescue
               @io.puts "> Couldn't find run with id #{run_id}"
+              puts "Couldn't find run with id #{run_id}"
               return
             end
         else
           @io.puts "> run_name and run_id are either nil or not specified"
+          puts "run_name and run_id are either nil or not specified"
           return
         end
 
@@ -78,6 +81,7 @@ module Res
               section = suite.find_section(:name => @ir.results[i][:name])
             rescue 
               @io.puts "> Couldn't find section with name #{@ir.results[i][:name]}" 
+              puts "Couldn't find section with name #{@ir.results[i][:name]}"
             end
             case_details(@ir.results[i], section)
             i += 1
