@@ -10,7 +10,10 @@ module Res
       attr_accessor :ir, :case_status, :config, :project, :suite
       def initialize(args)
         @url = args[:url]
-        @config = Res::Config.new([:user, :password, :namespace, :project, :suite, :run_id, :run_name], "test_rail_")
+        # @config = Res::Config.new([:user, :password, :namespace, :project, :suite, :run_id], [:run_name])
+        # @config = Res::Config.new([:user, :password, :namespace, :project, :suite, :run_id, :run_name], "test_rail_")
+        # @config = Res::Config.new([:user, :password, :namespace, :project, :suite, :run_id])
+        @config = Res::Config.new([:user, :password, :namespace, :project, :suite], :optional => [:run_id, :run_name], :pre_env => 'test_rail_')
         config.process(args)
 
         @case_status = {}
@@ -24,8 +27,7 @@ module Res
         rescue
           @io.puts "Project: #{test_rail_project} could not be found" 
           @io.puts "  Please create a project first to contain test suite #{@suite_name}"
-          puts "Project #{test_rail_project} could not be found"
-          return
+          return "Project #{test_rail_project} could not be found" 
         end
       end # initialize
 
@@ -36,7 +38,7 @@ module Res
 
         suite = @project.find_or_create_suite(:name => @suite_name, :id => @project.id)
         @io.puts "Syncing Suite"
-        
+
         i = 0
           while i < @ir.results.count         
             section = suite.find_or_create_section(:project_id => @project.id, :suite_id => suite.id, :name => @ir.results[i][:name])   
@@ -53,26 +55,24 @@ module Res
         sync_tests(args) if !@synced
         suite = @project.find_suite(:name => @suite_name)
 
-        if @config.struct.to_h.has_key?(:run_name) # and !@config.run_name.nil? 
+        if !@config.run_name.nil? 
           run_name = @config.run_name 
           @io.puts "> Created new run with name #{run_name}"
           run_id = @tr.add_run( :project_id => @project.id, :name => run_name, :description => args[:run_description], :suite_id => suite.id ).id
           @io.puts "> Created new run: #{run_id}"
         
-        elsif @config.struct.to_h.has_key?(:run_id) # and !@config.run_id.nil? 
+        elsif !@config.run_id.nil? 
           run_id = @config.run_id 
             begin
               run = @tr.get_run(:run_id => @config.run_id) 
               @io.puts "> Found run with id #{run_id}"
             rescue
               @io.puts "> Couldn't find run with id #{run_id}"
-              puts "Couldn't find run with id #{run_id}"
-              return
+              return "Couldn't find run with id #{run_id}"           
             end
         else
           @io.puts "> run_name and run_id are either nil or not specified"
-          puts "run_name and run_id are either nil or not specified"
-          return
+          return "run_name and run_id are either nil or not specified"          
         end
 
         i = 0
@@ -91,6 +91,7 @@ module Res
         add_case_status(run_id)
         @io.puts "> Added the test case status"
         @io.puts "> Submit Successful"
+        return "Submitted to Test Rail"
       end
 
       def tr
