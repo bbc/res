@@ -93,7 +93,6 @@ end
 raise "No results loaded" if !ir
 
 if options.reporter
-
   case options.reporter
   when 'hive'
     
