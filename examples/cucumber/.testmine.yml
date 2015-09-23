@@ -1,0 +1,6 @@
+url: http://localhost:3002
+authentication: 'authenticationkey'
+project: example  
+component: Example suite
+suite: 'Cucumber'
+

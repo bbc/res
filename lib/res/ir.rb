@@ -2,7 +2,8 @@ require 'json'
 
 module Res
   class IR
-    attr_accessor :hash, :results, :type, :start_time, :end_time
+    attr_accessor :hash, :results, :type, :start_time, :end_time, :world
+    attr_accessor :project, :suite, :target
  
     def self.load(file)
       f = File.open file
@@ -24,12 +25,15 @@ module Res
 
     # Dump as json
     def json
-      JSON.pretty_generate(
-      { :started     => @started,
+      hash = { :started     => @started,
         :finished    => @finished,
         :results     => @results,
         :type        => @type }
-      )
+      
+      # Merge in the world information if it's available
+      hash[:world] = world if world
+      
+      JSON.pretty_generate( hash )
     end
 
     # Pluck out the actual test nodes from the contexts
