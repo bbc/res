@@ -9,7 +9,7 @@ module Res
       
       attr_accessor :ir, :case_status, :config, :project, :suite
       def initialize(args)
-      	@url = args[:url]
+        @url = args[:url]
         @config = Res::Config.new([:user, :password, :namespace, :project, :suite, :run_id, :run_name], "test_rail_")
         config.process(args)
 
@@ -30,7 +30,7 @@ module Res
 
       # Creates a new suite within testrail
       def sync_tests(args)
-      	@ir = args[:ir]
+        @ir = args[:ir]
         @mappings = Res::Mappings.new(@ir.type)
 
         @io.puts "Syncing Suite"
@@ -51,7 +51,7 @@ module Res
         sync_tests(args) if !@synced
         suite = @project.find_suite(:name => @suite_name)
 
- 		if @config.struct.to_h.has_key?(:run_name) # and !@config.run_name.nil? 
+        if @config.struct.to_h.has_key?(:run_name) # and !@config.run_name.nil? 
           run_name = @config.run_name 
           @io.puts "> Created new run with name #{run_name}"
           run_id = @tr.add_run( :project_id => @project.id, :name => run_name, :description => args[:run_description], :suite_id => suite.id ).id
@@ -67,8 +67,8 @@ module Res
               return
             end
         else
-        	@io.puts "> run_name and run_id are either nil or not specified"
-        	return
+          @io.puts "> run_name and run_id are either nil or not specified"
+          return
         end
 
         i = 0
@@ -89,9 +89,9 @@ module Res
       end
 
       def tr
-      	@tr = ::TestRail::API.new( :user      => @config.user,
-                             		:password  => @config.password,
-                             		:namespace => @config.namespace) 
+        @tr = ::TestRail::API.new( :user      => @config.user,
+                                :password  => @config.password,
+                                :namespace => @config.namespace) 
       end
 
       # Add status to each testcase
