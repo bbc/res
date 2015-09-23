@@ -3,11 +3,14 @@ require 'yaml'
 
 module Res
   class Config
-    attr_accessor :struct, :prepend
+    attr_accessor :struct, :required, :optional, :prepend
         
-    def initialize(items, prepend = '')
+    def initialize(items, args = {})
+      @required = *items
+      @optional = args[:optional] || []
+      @prepend = args[:pre_env] || ''
+      items = required + optional
       @struct = Struct.new(*items).new
-      @prepend = prepend
     end
     
     # Load in config -- this can come from three places:
@@ -24,8 +27,8 @@ module Res
       
       missing = []
       struct.members.each do |item|
-        struct[item] = args[item] || ENV[(prepend + item.to_s).upcase] || config_from_file[item]
-        missing << item if !struct[item]
+        struct[item] = args[item] || ENV[(prepend + item.to_s).upcase] || config_from_file[item] || nil
+        missing << item if (struct[item].nil? && required.include?(item))
       end
       raise "Missing configuration: " + missing.join( ", ") if missing.any?
     end
