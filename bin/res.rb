@@ -4,7 +4,10 @@ require 'optparse'
 require 'ostruct'
 require 'res/ir'
 require 'res/reporters/testmine'
+<<<<<<< HEAD
 require 'res/reporters/test_rail'
+=======
+>>>>>>> 680572c1504073fd7be0af2a6cb6b8357fcedfb3
 require 'res/reporters/hive'
 require 'openssl'
 
