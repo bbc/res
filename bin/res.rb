@@ -3,6 +3,10 @@
 require 'optparse'
 require 'ostruct'
 require 'res/ir'
+require 'res/reporters/testmine'
+require 'res/reporters/test_rail'
+require 'res/reporters/hive'
+require 'openssl'
 
 class CLIParser
 
@@ -28,23 +32,23 @@ class CLIParser
       end
 
       opts.on("--cert CERT",
-              "Reporter to use to submit results") do |cert|
-        options.cacert = cert
+              "Client certificate file") do |cert|
+        options.cert = cert
       end
 
       opts.on("--cacert CACERT",
-              "Reporter to use to submit results") do |cacert|
-        options.reporter = cacert
+              "CA Certificate") do |cacert|
+        options.cacert = cacert
       end
 
-      opts.on("--ssl_verify_mode SSL_VERIFY_MODE",
-              "Reporter to use to submit results") do |cacert|
-        options.reporter = cacert
+      opts.on("--no-ssl-verification",
+              "Turn off ssl verification (don't do this)") do |no_ssl_verification|
+        options.ssl_verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
 
       opts.on("--url URL",
-              "URL to submit results to") do |reporter|
-        options.reporter = reporter
+              "URL to submit results to") do |url|
+        options.url = url
       end
 
       opts.on("--job-id JOB_ID",
@@ -52,6 +56,25 @@ class CLIParser
         options.job_id = job_id
       end
 
+      opts.on("--config-file CONFIG_FILE",
+              "Config file for the submitter") do |config_file|
+        options.config_file = config_file
+      end
+
+      opts.on("--version VERSION",
+              "VERSION of the world under test") do |version|
+        options.version = version
+      end
+      
+      opts.on("--target TARGET",
+              "Target of execution (e.g. Chrome)") do |target|
+        options.target = target
+      end
+      
+      opts.on_tail("-h", "--help", "Display help") do
+        puts opts
+        exit
+      end
 
     end
 
@@ -70,13 +93,13 @@ end
 raise "No results loaded" if !ir
 
 if options.reporter
-  
+
   case options.reporter
   when 'hive'
     
     raise "Need to provide a hive job_id" if !options.job_id
     
-    reporter = Res::Reporter::Hive.new(
+    reporter = Res::Reporters::Hive.new(
       :url => options.url,
       :cert => options.cert,
       :cacert => options.cacert,
@@ -84,8 +107,30 @@ if options.reporter
     )
     
     reporter.submit( ir, :job_id => options.job_id )
+  when 'testmine'
     
+    reporter = Res::Reporters::Testmine.new(
+      :config_file => options.config_file,
+      :version     => options.version,
+      :target      => options.target,
+      :url         => options.url
+    )
+    
+    id = reporter.submit_results(ir)
+    puts "Reported to testmine: #{id}"
+  when 'testrail'
+    reporter = Res::Reporters::TestRail.new(
+      :config_file => options.config_file,
+      :target      => 'chrome',
+      :version     => 'version',
+      :url         => options.url,
+      :ir          => ir
+    )
+ 
+    id = reporter.submit_results(:ir => ir, :run_id => options.run_id)
+    puts "Reported to testrail"
   else
+
     raise "#{options.reporter} not implemented"
   end
   
