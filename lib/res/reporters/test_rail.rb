@@ -101,7 +101,7 @@ module Res
       end
 
       def tr
-        @tr = ::TestRail::API.new( :user      => @config.user,
+        @tr = ::TestRail::API.new( :user   => @config.user,
                                 :password  => @config.password,
                                 :namespace => @config.namespace) 
       end
