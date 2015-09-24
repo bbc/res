@@ -6,6 +6,7 @@ require 'res/ir'
 require 'res/reporters/testmine'
 require 'res/reporters/test_rail'
 require 'res/reporters/hive'
+require 'res/formatters/junit'
 require 'openssl'
 
 class CLIParser
@@ -29,6 +30,11 @@ class CLIParser
       opts.on("-s", "--submit REPORTER",
               "Reporter to use to submit results") do |reporter|
         options.reporter = reporter
+      end
+
+      opts.on("--junit junit_xml",
+              "Format junit xml to res type") do |junit|
+        options.junit = junit
       end
 
       opts.on("--cert CERT",
@@ -90,6 +96,11 @@ if options.res
   puts 'IR File loaded'
 end
 
+if options.junit
+    junit_output = Res::Formatters::Junit.new(options.junit)
+    ir = Res::IR.load(junit_output.io)
+end 
+
 raise "No results loaded" if !ir
 
 if options.reporter
@@ -120,14 +131,13 @@ if options.reporter
   when 'testrail'
     reporter = Res::Reporters::TestRail.new(
       :config_file => options.config_file,
-      :target      => 'chrome',
-      :version     => 'version',
+      :target      => options.target,
       :url         => options.url,
       :ir          => ir
     )
  
-    id = reporter.submit_results(:ir => ir, :run_id => options.run_id)
-    puts "Reported to testrail"
+    id = reporter.submit_results(:ir => ir)
+    puts id
   else
 
     raise "#{options.reporter} not implemented"
