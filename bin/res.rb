@@ -1,5 +1,3 @@
-#! /usr/bin/env ruby
-
 require 'optparse'
 require 'ostruct'
 require 'res/ir'
@@ -136,12 +134,9 @@ if options.reporter
       :ir          => ir
     )
  
-    id = reporter.submit_results(:ir => ir)
-    puts id
+    output = reporter.submit_results(:ir => ir)
+    puts output
   else
 
     raise "#{options.reporter} not implemented"
   end
-  
-end
-
