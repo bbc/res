@@ -24,6 +24,7 @@ module Res
         rescue
           @io.puts "Project: #{test_rail_project} could not be found" 
           @io.puts "  Please create a project first to contain test suite #{@suite_name}"
+          @io.close
           return "Project #{test_rail_project} could not be found" 
         end
       end # initialize
@@ -68,11 +69,13 @@ module Res
               @io.puts "> Found run with id #{run_id}"
             rescue
               @io.puts "> Couldn't find run with id #{run_id}"
+              @io.close
               return "Couldn't find run with id #{run_id}"           
             end
 
         else
           @io.puts "> run_name and run_id are either nil or not specified"
+          @io.close
           return "run_name and run_id are either nil or not specified"          
 
         end
@@ -93,6 +96,7 @@ module Res
         add_case_status(run_id)
         @io.puts "> Added the test case status"
         @io.puts "> Submit Successful"
+        @io.close
         return "Submitted to Test Rail"
       end
 
