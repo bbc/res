@@ -3,7 +3,7 @@ require 'json'
 module Res
   class IR
     attr_accessor :hash, :results, :type, :start_time, :end_time, :world
-    attr_accessor :project, :suite, :target
+    attr_accessor :project, :suite, :target, :hive_job_id
  
     def self.load(file)
       f = File.open file
@@ -26,13 +26,15 @@ module Res
 
     # Dump as json
     def json
-      hash = { :started     => @started,
+      hash = {
+        :started     => @started,
         :finished    => @finished,
         :results     => @results,
         :type        => @type }
       
       # Merge in the world information if it's available
       hash[:world] = world if world
+      hash[:hive_job_id] = hive_job_id if hive_job_id
       
       JSON.pretty_generate( hash )
     end
