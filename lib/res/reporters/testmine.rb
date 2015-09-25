@@ -8,15 +8,18 @@ module Res
 
       def initialize(args)
         @url = args[:url]
-        @config = Res::Config.new([:project, :component, :suite, :version, :url, :target])
+        @config = Res::Config.new([:project, :component, :suite, :version, :url, :target],
+                                  :optional => [:hive_job_id],
+                                  :pre_env  => 'TESTMINE_')
         config.process(args)
       end
 
-      def submit_results(ir)
+      def submit_results(ir, args)
         # Set missing project information
-        ir.project = config.project
-        ir.suite   = config.suite
-        ir.target  = config.target
+        ir.project     = config.project
+        ir.suite       = config.suite
+        ir.target      = config.target
+        ir.hive_job_id = config.hive_job_id 
         
         # Load world information into json hash
         ir.world = {

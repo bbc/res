@@ -23,7 +23,7 @@ module Res
       Res::Reporters::Hive
     when :testmine
       require 'res/reporters/testmine'
-      Res::Reporters::TestMine
+      Res::Reporters::Testmine
     end
   end
 
