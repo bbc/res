@@ -5,7 +5,7 @@ require 'res/ir'
 module Res
   module Formatters
     class Junit
-      attr_accessor  :ir, :io
+      attr_accessor :io
      
       def initialize(junit_xml)
         file = File.open(junit_xml, "rb") 
@@ -15,15 +15,16 @@ module Res
          raise "Invalid xunit XML format. Error: #{e}"
         end
         file.close
-        @result = Array.new
-        @result = attach_suite(junit)
-        @ir = ::Res::IR.new( :type        => 'Junit', 
+        result = Array.new
+        result = attach_suite(junit)
+        ir = ::Res::IR.new( :type        => 'Junit', 
                             :started     => "",
                             :finished    => Time.now(),
-                            :results     => @result
+                            :results     => result
                             )
         @io = File.open("./junit.res", "w")
-        @io.puts @ir.json
+        @io.puts ir.json
+        @io.close
       end
 
       def attach_cases(node)
