@@ -140,3 +140,4 @@ if options.reporter
 
     raise "#{options.reporter} not implemented"
   end
+end
