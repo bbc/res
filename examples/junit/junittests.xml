@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<testsuites name="AllTestUnits" tests="908" failures="0" errors="0" time="63.523571">
+
+<testsuite time="65.130647" timestamp="2015-08-18T12:12:45GMT+01:00" name="Test Suite 1">
+    <testcase classname="Class1" name="Test Case 1" time="0.000571">
+        <system-out>2015-08-18 12:12:45.257 BBCiPlayerRadio[29625:16284525] + 'Whats New Service, no whats new URL, should not show whats new' [PASSED]
+        </system-out>
+    </testcase>
+    
+    <testcase classname="Class1" name="002-failed-test" time="20">
+        <failure message="Assertion FAILED: some failed assert" type="failure"> the output of the testcase</failure>
+    </testcase>
+    
+    <testsuite time="65.130647" timestamp="2015-08-18T12:12:45GMT+01:00" name="Test Suite Inner">
+        <testcase classname="Class1.class1" name="Test Case 111" time="0.000571">
+            <system-out>2015-08-18 12:12:45.257 BBCiPlayerRadio[29625:16284525] + 'Whats New Service, no whats new URL, should not show whats new' [PASSED]
+            </system-out>
+        </testcase>
+        <testcase classname="Class1.class2" name="Test Case 222" time="0.000571">
+            <system-out>2015-08-18 12:12:45.257 BBCiPlayerRadio[29625:16284525] + 'Whats New Service, no whats new URL, should not show whats new' [PASSED]
+            </system-out>
+        </testcase>
+    </testsuite>
+    
+    <testcase classname="Class1" name="Test Case 2" time="0.000571">
+        <system-out>2015-08-18 12:12:45.257 BBCiPlayerRadio[29625:16284525] + 'Whats New Service, no whats new URL, should not show whats new' [PASSED]
+        </system-out>
+    </testcase>
+</testsuite>
+
+<testsuite time="65.130647" timestamp="2015-08-18T12:12:45GMT+01:00" name="Test Suite 2">
+    <testcase classname="Class2" name="Test Case 11" time="0.000571">
+        <system-out>2015-08-18 12:12:45.257 BBCiPlayerRadio[29625:16284525] + 'Whats New Service, no whats new URL, should not show whats new' [PASSED]
+        </system-out>
+    </testcase>
+    <testcase classname="Class2" name="Test Case 22" time="0.000571">
+        <system-out>2015-08-18 12:12:45.257 BBCiPlayerRadio[29625:16284525] + 'Whats New Service, no whats new URL, should not show whats new' [PASSED]
+        </system-out>
+    </testcase>
+    
+</testsuite>
+
+
+</testsuites>
+
+
