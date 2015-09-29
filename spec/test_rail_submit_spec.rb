@@ -37,7 +37,7 @@ describe Res::Reporters::TestRail do
 
       it "Submit the test results", :if => File.exists?("./examples/cucumber/.test_rail.yaml") do
         `#{cucumber_command} features/tags.feature -f Res::Formatters::RubyCucumber -o ./cucumber.res`
-        @output = `RUBYLIB=lib bundle exec ruby ./bin/res.rb --res examples/cucumber/cucumber.res --submit testrail --config-file ./examples/cucumber/.test_rail.yaml`
+        @output = `unset BUNDLE_GEMFILE; unset RUBYOPT; RUBYLIB=lib bundle exec ruby ./bin/res.rb --res examples/cucumber/cucumber.res --submit testrail --config-file ./examples/cucumber/.test_rail.yaml`
         expect( @output ).to include ("Submitted to Test Rail")
       end
 
