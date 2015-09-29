@@ -3,7 +3,7 @@ require 'json'
 require 'res/ir'
 
 module Res
-  module Formatters
+  module Parsers
     class Junit
       attr_accessor :io
      
@@ -60,6 +60,6 @@ module Res
         suite
       end # def attach_suite
     end # class JUnit 
-  end # class Formatters
+  end # class Parsers
 end # class Res
 
