@@ -27,4 +27,19 @@ module Res
     end
   end
 
+  def self.parse_results(args)
+    parser_class = Res.parser_class(args[:formatter])
+    parser_class.new(args[:file])
+  end
+
+  def self.parser_class(type)
+    case type
+    when :junit
+      require 'res/parsers/junit'
+      Res::Parsers::Junit
+    else
+      raise "#{type} parser not Implemented"
+    end
+  end
+
 end
