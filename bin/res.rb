@@ -4,7 +4,7 @@ require 'res/ir'
 require 'res/reporters/testmine'
 require 'res/reporters/test_rail'
 require 'res/reporters/hive'
-require 'res/formatters/junit'
+require 'res/parsers/junit'
 require 'openssl'
 
 class CLIParser
@@ -31,7 +31,7 @@ class CLIParser
       end
 
       opts.on("--junit junit_xml",
-              "Format junit xml to res type") do |junit|
+              "Parse junit xml to res type") do |junit|
         options.junit = junit
       end
 
@@ -95,7 +95,7 @@ if options.res
 end
 
 if options.junit
-    junit_output = Res::Formatters::Junit.new(options.junit)
+    junit_output = Res::Parsers::Junit.new(options.junit)
     ir = Res::IR.load(junit_output.io)
 end 
 
