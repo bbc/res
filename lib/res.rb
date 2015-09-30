@@ -28,7 +28,7 @@ module Res
   end
 
   def self.parse_results(args)
-    parser_class = Res.parser_class(args[:formatter])
+    parser_class = Res.parser_class(args[:parser])
     parser_class.new(args[:file])
   end
 
