@@ -44,6 +44,12 @@ describe Res::IR do
         expect(ir.count(:unknown)).to eq 0
       end
     end
+
+    describe "flat_format" do
+      it "Returns the results as a flat array" do
+        expect(ir.flat_format).to be_a Array
+      end
+    end
   end
 
 end

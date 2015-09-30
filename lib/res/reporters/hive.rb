@@ -1,4 +1,5 @@
 require 'hive/messages'
+require 'json'
 
 module Res
   module Reporters
@@ -17,13 +18,14 @@ module Res
       end
 
       def submit_results(ir, args)
-
-        # Really dump reporting solution (just counts)
-        params = { failed_count: ir.count(:failed), 
-                   passed_count: ir.count(:passed), 
-                   errored_count: ir.count(:errored), 
-                   running_count: ir.count(:running) }
-
+        
+        # Still include count summaries for backward compatability
+        params = { :failed_count => ir.count(:failed), 
+                   :passed_count => ir.count(:passed), 
+                   :errored_count => ir.count(:errored), 
+                   :running_count => ir.count(:running),
+                   :result_details => ir.flat_format.to_json }
+        
         hive_job = ::Hive::Messages::Job.new(:job_id => args[:job_id])
         begin
           update_response = hive_job.update_results(params)
