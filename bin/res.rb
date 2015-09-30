@@ -105,7 +105,7 @@ if options.reporter
       :ssl_verify_mode => options.ssl_verify_mode
     )
     
-    reporter.submit( ir, :job_id => options.job_id )
+    reporter.submit_results( ir, :job_id => options.job_id )
   when 'testmine'
     
     reporter = Res::Reporters::Testmine.new(

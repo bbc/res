@@ -49,10 +49,14 @@ module Res
     end
 
     # Returns a simple array of test information
-    # [ { :name => 'test1', :uri => 'file/tests.t:32', :status => 'passed', :time => 12.04 },
-    #   { :name => 'test2', :uri => 'file/tests.t:36', :status => 'failed', :time =>  } ]
+    # [ { :name => 'test1', :urn => 'file/tests.t:32', :status => 'passed', :time => 12.04 },
+    #   { :name => 'test2', :urn => 'file/tests.t:36', :status => 'failed', :time =>  } ]
     def flat_format
-
+      self.tests.collect do |t|
+        { :name   => t[:name],
+          :urn    => t[:urn],
+          :status => t[:status] }
+      end
     end
     
     private
