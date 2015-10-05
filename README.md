@@ -26,12 +26,12 @@ a test suite alongside results and metadata.
 ## Formatters and Parsers
 You can dump a Res IR results file using a cucumber formatter or parse xunit output into res format. 
 
-### Cucumber
+## Cucumber
 
     cucumber -f pretty -f Res::Formatters::RubyCucumber -o './cucumber.res'
 Note: This cucumber formatter works for cucumber version < 2.0 
 
-### Junit
+## Junit
 
     ./bin/res.rb --junit '/path/to/xunit_result.xml'
 Note: The res output of xunit parser is saved in res root dir
@@ -61,13 +61,11 @@ Hive CI uses a Res reporter for result submission, the api args look like this:
 
     ./bin/res.rb --res '/path/to/file.res' --submit testrail --config-file '/path/to/.test_rail.yaml'
 
-### TestRail Reporter
-
 Our testrail reporter currently be used to sync a suite with testrail, and
 to submit test results against a test run. You will need to create a
-config file in your project in order for our formatter to know where to sync
+config file in your project in order for our reporter to know where to sync
 the tests and put the results.
-
+    
 Your file should be called .test_rail.yaml, and looks like this:
 
     namespace: 'NameSpace'
@@ -77,13 +75,13 @@ Your file should be called .test_rail.yaml, and looks like this:
     suite:     'MySuite'
     run_name:  'RunName' or run_id:    '1234'
 
-### Testmite Reporter
+### Testmine 
 
 The tesmine reporter is very similar to the testrail reporter, but doesn't 
 require you to sync your test definitions before you submit a run.
 
 You need to create a project file in the root of your test code, the file 
-should be called .testmite.yaml, and looks like this:
+should be called .testmine.yaml, and looks like this:
 
     testmine_url: 'mytestmineinstance.bbc.co.uk'
     authentication: 'authenticationkey'
