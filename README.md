@@ -77,7 +77,7 @@ Your file should be called .test_rail.yaml, and looks like this:
 
 ### Testmine 
 
-The tesmine reporter is very similar to the testrail reporter, but doesn't 
+The testmine reporter is very similar to the testrail reporter, but doesn't 
 require you to sync your test definitions before you submit a run.
 
 You need to create a project file in the root of your test code, the file 
