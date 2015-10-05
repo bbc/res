@@ -7,14 +7,15 @@ tools and result repositories, we standardise on one format for test
 results (an Intermediate Representation) and write a single formatter
 and submitter for each runner and repository.
 
-For example, reporting cucumber results into testrail:
+For example, reporting results into testrail:
 
-    Cucumber      --------->    Intermediate     -------->   TestRail
-    Formatter                  Representation                Reporter
+    Formatter      --------->    Intermediate     -------->   Reporter
+    or Parser                   Representation                
 
 ## Frontends
 
 There are three different types of frontend:
+
 1. Formatters -- libs that can be loaded into a test runner to generate IR output
 2. Parsers -- scripts that parse result files into IR after a test runner has completed
 3. Native -- custom test runners that use IR as their native format
@@ -22,14 +23,17 @@ There are three different types of frontend:
 IR is a json formatted file that captures a hierarchical definition of 
 a test suite alongside results and metadata.
 
-## Formatters
+## Formatters and Parsers
+You can dump a Res IR results file using a cucumber formatter or parse xunit output into res format. 
 
 ### Cucumber
 
-You can dump a Res IR results file using a cucumber formater. Simply add
-the cucumber formatter to your command line:
-
     cucumber -f pretty -f Res::Formatters::RubyCucumber -o './cucumber.res'
+
+### Junit
+
+    ./bin/res.rb --junit '/path/to/xunit_result.xml'
+Note: The res output of xunit parser is saved in root dir
 
 ## Reporters
 
@@ -39,11 +43,7 @@ tool.
 
 If you have a res IR file, you can submit using a reporter: 
 
-    res report --ir <IR_FILE> --repo <REPO_TYPE> [... options]
-
-You can also report results using the api:
-    
-    Res.report( :ir => '/path/to/file.res', :reporter => :hive, ... ) 
+    ./bin/res.rb --res '/path/to/file.res' --submit REPORTER [... options]
 
 ### Hive
 
@@ -51,19 +51,14 @@ Hive CI uses a Res reporter for result submission, the api args look like this:
 
     Res.submit_results( 
       :reporter => :hive, 
-      :ir       => 'spec/outputs/cucumber.res', 
+      :ir       => 'path/to/file.res', 
       :url      => 'http://hive.local', 
-      :job_id => 10723 
+      :job_id   => 10723 
     )
 
 ### Test Rail
 
-    res report --ir ./cucumber.res --repo test_rail 
-      --username username --password password --namespace mynamespace
-
-Using the api:
-
-    Res.report( :ir => '/path/to/ir', :reporter => :test_rail )
+    ./bin/res.rb --res '/path/to/file.res' --submit testrail --config-file '/path/to/.test_rail.yaml'
 
 ### TestRail Reporter
 
@@ -74,84 +69,23 @@ the tests and put the results.
 
 Your file should be called .test_rail.yaml, and looks like this:
 
-    namespace: 'iplayer'
-    user:      'testrail@example.com'
+    namespace: 'NameSpace'
+    user:      'user@example.com'
     password:  'passw0rd'
-    project:   'iPlayer Android'
-    suite:     'Features'
-
-Note: Res does not pick a project and suite name for you if you don't 
-define one.
-
-When submitting results, you will need to provide your testrail run id
-that you want your results to be reported against or a name and description
-if you want Res to create a run for you.
-
-You will also need to provide a version string, this is a text string for
-identifting the thing you're testing (e.g. a tag or revision number).
-
-#### Tags
-
-Res lets you synchronise your cucumber tags with testrail. The default
-behaviour matches tags to case types and priorities. For example, if you tag a
-scenario: @automated, and you have an 'Automated' test case type in testrail,
-the 'Automated' case type will be selected for that scenario.
-
-If you have a scenario tagged @high, and a priority named 'High', the priority
-will be set to 'High' for that scenario.
-
-Any unmatched case types and priorities will be set to the default selection.
-
-You can add in additional custom mappings for case types in the .test_rail.yaml
-file:
-
-    tag_type_mappings:
-      automatable: 'Manual'
-      wip: 'Unimplemented'
-
-#### Examples
-
-Syncing a cucumber test suite with TestRail:
-
-First you need to create a .test_rail.yaml file at the base of your cucumber
-folder. This contains some important config for your testrail setup. Then, in
-order to sync your tests with testrail, run:
-
-    bundle exec cucumber -f TestRail::Sync --dry-run
-
-You will then need to create a test plan or test run in testrail. You submit
-results for an individual run by doing:
-
-    TEST_RAIL_RUN_ID=22 VERSION='v1.2.3' bundle exec cucumber -f TestRail::Submit
-    
-You can get Res to create a run for you by providing a run name and
-optional run description:
-
-    TEST_RAIL_RUN_NAME='ci run #1' TEST_RAIL_RUN_DESCRIPTION='RC Test run overnights \
-    VERSION= 'v1.2.3' bundle exec cucumber -f TestRail::Submit
+    project:   'MyProjectName'
+    suite:     'MySuite'
+    run_name:  'RunName' or run_id:    '1234'
 
 ### Testmite Reporter
 
-The tesmite reporter is very similar to the testrail reporter, but doesn't 
+The tesmine reporter is very similar to the testrail reporter, but doesn't 
 require you to sync your test definitions before you submit a run.
 
 You need to create a project file in the root of your test code, the file 
 should be called .testmite.yaml, and looks like this:
 
-    testmite_url: 'mytestmiteinstance.bbc.co.uk'
+    testmine_url: 'mytestmiteinstance.bbc.co.uk'
     authentication: 'authenticationkey'
-    project:   'iPlayer Radio'
+    project:   'MyProjectName'
     component: 'Android acceptance'
-    suite:     'Cucumber'
-
-When submitting your results you will need to provide a version string
-and target string to store your test results against.
-
-#### Examples
-
-You can submit your cucumber results to testmite by running a command like
-the following:
-
-    VERSION='1.2.3' TARGET='nexus5' bundle exec cucumber -f Testmite::Submit
-
-
+    suite:     'MySuiteName'
