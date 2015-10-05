@@ -29,11 +29,12 @@ You can dump a Res IR results file using a cucumber formatter or parse xunit out
 ### Cucumber
 
     cucumber -f pretty -f Res::Formatters::RubyCucumber -o './cucumber.res'
+Note: This cucumber formatter works for cucumber version < 2.0 
 
 ### Junit
 
     ./bin/res.rb --junit '/path/to/xunit_result.xml'
-Note: The res output of xunit parser is saved in root dir
+Note: The res output of xunit parser is saved in res root dir
 
 ## Reporters
 
