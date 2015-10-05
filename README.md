@@ -7,16 +7,16 @@ tools and result repositories, we standardise on one format for test
 results (an Intermediate Representation) and write a single formatter
 and submitter for each runner and repository.
 
-For example, reporting results into testrail:
+For example, reporting results into TestRail:
 
     Formatter      --------->    Intermediate     -------->   Reporter
     or Parser                   Representation                
 
 ## Frontends
 
-There are three different types of frontend:
+There are three different types of front end:
 
-1. Formatters -- libs that can be loaded into a test runner to generate IR output
+1. Formatters -- libraries that can be loaded into a test runner to generate IR output
 2. Parsers -- scripts that parse result files into IR after a test runner has completed
 3. Native -- custom test runners that use IR as their native format
 
@@ -42,13 +42,13 @@ There are a number of backend reporters, for taking IR and producing a report fr
 it, or submitting the IR results to a test repository or test management
 tool.
 
-If you have a res IR file, you can submit using a reporter: 
+If you have a Res IR file, you can submit using a reporter: 
 
     ./bin/res.rb --res '/path/to/file.res' --submit REPORTER [... options]
 
 ### Hive
 
-Hive CI uses a Res reporter for result submission, the api args look like this:
+Hive CI uses a Res reporter for result submission, the api arguments look like this:
 
     Res.submit_results( 
       :reporter => :hive, 
@@ -57,16 +57,16 @@ Hive CI uses a Res reporter for result submission, the api args look like this:
       :job_id   => 10723 
     )
 
-### Test Rail
+### TestRail
 
     ./bin/res.rb --res '/path/to/file.res' --submit testrail --config-file '/path/to/.test_rail.yaml'
 
-Our testrail reporter currently be used to sync a suite with testrail, and
+Our TestRail reporter currently be used to sync a suite with TestRail, and
 to submit test results against a test run. You will need to create a
 config file in your project in order for our reporter to know where to sync
 the tests and put the results.
     
-Your file should be called .test_rail.yaml, and looks like this:
+Your config file should be called .test_rail.yaml, and should look like this:
 
     namespace: 'NameSpace'
     user:      'user@example.com'
@@ -77,11 +77,11 @@ Your file should be called .test_rail.yaml, and looks like this:
 
 ### Testmine 
 
-The testmine reporter is very similar to the testrail reporter, but doesn't 
+The Testmine reporter is very similar to the TestRail reporter, but doesn't 
 require you to sync your test definitions before you submit a run.
 
 You need to create a project file in the root of your test code, the file 
-should be called .testmine.yaml, and looks like this:
+should be called .testmine.yaml, and should look like this:
 
     testmine_url: 'mytestmineinstance.bbc.co.uk'
     authentication: 'authenticationkey'
