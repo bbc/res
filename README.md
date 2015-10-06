@@ -34,7 +34,7 @@ Note: This cucumber formatter works for cucumber version < 2.0
 ## Junit
 
     ./bin/res.rb --junit '/path/to/xunit_result.xml'
-Note: The Res output of the xunit parser is saved in the Res root directory
+Note: The Res output of the xunit parser is saved in the current directory
 
 ## Reporters
 
