@@ -20,8 +20,6 @@ module Res
         @prefixes = options[:prefixes] || {}
         @delayed_messages = []
         @_start_time = Time.now
-
-        @step = []
       end
 
       def before_features(features)
@@ -110,22 +108,13 @@ module Res
       # After a scenario
       def after_feature_element(feature_element)
         @_context = {}
-  
-     #    @step.each do |step|
-     #      if step[:status].to_s == "failed"
-     #        @_feature_element[:status] = "failed"
-     #        break;
-     #      elsif step[:status].to_s == "passed"
-     #        # @_feature_element[:status] = feature_element.status
-     #        @_feature_element[:status] = "passed"
-     #      end
-     #    end      
-     # puts @_feature_element[:status]
+
+############### Added ##############################
 
         scenario_class = Cucumber::Formatter::LegacyApi::Ast::Scenario
         example_table_class = Cucumber::Core::Ast::Location
 
-        fail =   @runtime.scenarios(:failed).select do |s|
+        fail =  @runtime.scenarios(:failed).select do |s|
           [scenario_class, example_table_class].include?(s.class)
         end.map do |s|
           if s.location == feature_element.location
@@ -139,6 +128,9 @@ module Res
           fail = fail.compact
           @_feature_element[:status] = fail[0].status
         end
+
+#####################################################
+
         @_feature_element[:finished] = Time.now
       end
 
@@ -187,7 +179,6 @@ module Res
         @_feature_element = {} if !@_feature_element
         @_feature_element[:children] = [] if !@_feature_element[:children]
         @_feature_element[:children] << @_step
-@step << @_step
         @_context = @_step
       end
 
@@ -266,12 +257,16 @@ module Res
       end
 
       def after_table_row(table_row)
+   ################ Added ################################
         if table_row.class == Cucumber::Formatter::LegacyApi::Ast::ExampleTableRow #Cucumber::Ast::OutlineTable::ExampleRow 
+   #####################################################
           @_current_table_row[:name] = table_row.name
           if table_row.exception
             @_current_table_row[:message] = table_row.exception.to_s
           end
+    ################ Added ################################
           if table_row.status and table_row.status != "skipped" and table_row.status != nil#after_table_row.scenario_outline
+    #####################################################
             @_current_table_row[:status] = table_row.status
           end
             
