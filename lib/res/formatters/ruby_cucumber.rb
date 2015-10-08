@@ -50,7 +50,7 @@ module Res
            uri = feature.location.to_s
           end
           
-          hash = RubyCucumber.split_uri( uri ) #feature.file.to_s )#feature.location.to_s )
+          hash = RubyCucumber.split_uri( uri )
           @_feature[:file] = hash[:file]
           @_feature[:line] = hash[:line]
           @_feature[:urn]  = hash[:urn]
@@ -103,7 +103,7 @@ module Res
           else  
             uri = feature_element.location.to_s
           end
-          hash = RubyCucumber.split_uri( uri )#feature_element.file_colon_line) #feature_element.location.to_s )
+          hash = RubyCucumber.split_uri( uri )
           @_feature_element[:file] = hash[:file]
           @_feature_element[:line] = hash[:line]
           @_feature_element[:urn] = hash[:urn]
@@ -251,7 +251,7 @@ module Res
       end
 
       def after_table_row(table_row)
-        if table_row.class == Cucumber::Ast::OutlineTable::ExampleRow 
+        if table_row.class == Cucumber::Ast::OutlineTable::ExampleRow
           @_current_table_row[:name] = table_row.name
           if table_row.exception
             @_current_table_row[:message] = table_row.exception.to_s
