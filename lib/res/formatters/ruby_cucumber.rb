@@ -11,6 +11,9 @@ module Res
       include ::Cucumber::Formatter::Io
 
       def initialize(runtime, path_or_io, options)
+        cucumber_version = %x(cucumber --version)
+        @cucumber_version = cucumber_version.gsub("\n","") 
+        
         @runtime = runtime
         @io = ensure_io(path_or_io, "reporter")
         @options = options
@@ -41,7 +44,13 @@ module Res
         @_context = {}
         @_feature[:started] = Time.now()
         begin
-          hash = RubyCucumber.split_uri( feature.location.to_s )
+          if @cucumber_version.to_f < 1.3.to_f
+            uri = feature.file.to_s
+          else  
+           uri = feature.location.to_s
+          end
+          
+          hash = RubyCucumber.split_uri( uri )
           @_feature[:file] = hash[:file]
           @_feature[:line] = hash[:line]
           @_feature[:urn]  = hash[:urn]
@@ -89,7 +98,12 @@ module Res
         @_context = {}
         @_feature_element[:started] = Time.now
         begin
-          hash = RubyCucumber.split_uri( feature_element.location.to_s )
+          if @cucumber_version.to_f < 1.3.to_f
+            uri = feature_element.file_colon_line
+          else  
+            uri = feature_element.location.to_s
+          end
+          hash = RubyCucumber.split_uri( uri )
           @_feature_element[:file] = hash[:file]
           @_feature_element[:line] = hash[:line]
           @_feature_element[:urn] = hash[:urn]
@@ -245,7 +259,6 @@ module Res
           if table_row.scenario_outline
             @_current_table_row[:status] = table_row.status
           end
-            
           @_current_table_row[:line] = table_row.line
           @_current_table_row[:urn] = @_feature_element[:file] + ":" + table_row.line.to_s
           @_table << @_current_table_row
