@@ -7,7 +7,9 @@ require 'cucumber/formatter/summary'
 
 module Res
   module Formatters
+  ################ Added ################################
     class RubyCucumber2_0
+  #####################################################    
       include FileUtils
       include ::Cucumber::Formatter::Io
      
@@ -42,7 +44,9 @@ module Res
         @_context = {}
         @_feature[:started] = Time.now()
         begin
+     ################ Added ################################
           hash = RubyCucumber2_0.split_uri( feature.location.to_s )
+     #######################################################
           @_feature[:file] = hash[:file]
           @_feature[:line] = hash[:line]
           @_feature[:urn]  = hash[:urn]
@@ -90,7 +94,9 @@ module Res
         @_context = {}
         @_feature_element[:started] = Time.now
         begin
+       ################## ADDED #####################  
           hash = RubyCucumber2_0.split_uri( feature_element.location.to_s )
+       ##############################################
           @_feature_element[:file] = hash[:file]
           @_feature_element[:line] = hash[:line]
           @_feature_element[:urn] = hash[:urn]
@@ -109,8 +115,7 @@ module Res
       def after_feature_element(feature_element)
         @_context = {}
 
-############### Added ##############################
-
+       ############### Added ##############################
         scenario_class = Cucumber::Formatter::LegacyApi::Ast::Scenario
         example_table_class = Cucumber::Core::Ast::Location
 
@@ -128,8 +133,7 @@ module Res
           fail = fail.compact
           @_feature_element[:status] = fail[0].status
         end
-
-#####################################################
+      ###############################################
 
         @_feature_element[:finished] = Time.now
       end
