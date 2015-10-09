@@ -7,7 +7,7 @@ tools and result repositories, we standardise on one format for test
 results (an Intermediate Representation) and write a single formatter
 and submitter for each runner and repository.
 
-Flow of testing tool output to reporting tool like testrail
+Example: Reporting a testing tool output to testrail
 
     Formatter      --------->    Intermediate     -------->   Reporter
     or Parser                   Representation               (TestRail)
