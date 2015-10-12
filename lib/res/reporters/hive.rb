@@ -19,11 +19,16 @@ module Res
 
       def submit_results(ir, args)
         
+        passed  = ir.count(:passed)
+        failed  = ir.count(:failed)
+        running = ir.count(:running)
+        errored = ir.tests.count - passed - failed - running
+        
         # Still include count summaries for backward compatability
-        params = { :failed_count => ir.count(:failed), 
-                   :passed_count => ir.count(:passed), 
-                   :errored_count => ir.count(:errored), 
-                   :running_count => ir.count(:running),
+        params = { :failed_count => failed, 
+                   :passed_count => passed, 
+                   :errored_count => errored, 
+                   :running_count => running,
                    :result_details => ir.flat_format.to_json }
         
         hive_job = ::Hive::Messages::Job.new(:job_id => args[:job_id])
