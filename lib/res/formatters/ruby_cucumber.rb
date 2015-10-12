@@ -6,7 +6,7 @@ require 'cucumber/formatter/io'
 
 module Res
   module Formatters
-    class RubyCucumber
+    class RubyCucumberLegacy
       include FileUtils
       include ::Cucumber::Formatter::Io
 
@@ -129,7 +129,6 @@ module Res
       end
 
       def before_background(background)
-        #@_context[:background] = background
       end
 
       def after_background(background)
@@ -138,24 +137,8 @@ module Res
       def background_name(keyword, name, file_colon_line, source_indent)
       end
 
-        #    def before_examples_array(examples_array)
-        #      @indent = 4
-        #      @io.puts
-        #      @visiting_first_example_name = true
-        #    end
-        #
-
       def examples_name(keyword, name)
-        #      @io.puts unless @visiting_first_example_name
-        #      @visiting_first_example_name = false
-        #      names = name.strip.empty? ? [name.strip] : name.split("\n")
-        #      @io.puts("    #{keyword}: #{names[0]}")
-        #      names[1..-1].each {|s| @io.puts "      #{s}" } unless names.empty?
-        #      @io.flush
-        #      @indent = 6
-        #      @scenario_indent = 6
       end
-        #
 
       def scenario_name(keyword, name, file_colon_line, source_indent)
         @_context[:type] = "Cucumber::" + keyword.gsub(/\s+/, "")
@@ -176,22 +159,6 @@ module Res
         @_context = @_step
       end
 
-    #  def before_step_result(keyword, step_match, multiline_arg, status, exception, source_indent, background, file_colon_line)
-    #    @hide_this_step = false
-    #    if exception
-    #      if @exceptions.include?(exception)
-    #        @hide_this_step = true
-    #        return
-    #      end
-    #      @exceptions << exception
-    #    end
-    #    if status != :failed && @in_background ^ background
-    #      @hide_this_step = true
-    #      return
-    #    end
-    #    @status = status
-    #  end
-
       # Argument list changed after cucumber 1.4, hence the *args
       def step_name(keyword, step_match, status, source_indent, background, *args)
 
@@ -201,27 +168,15 @@ module Res
         name = keyword + step_match.format_args(lambda{|param| %{#{param}}}) 
         @_step[:name] = name
         @_step[:status] = status
-        #@_step[:background] = background
         @_step[:type] = "Cucumber::Step"
 
       end
 
-        #    def doc_string(string)
-        #      return if @options[:no_multiline] || @hide_this_step
-        #      s = %{"""\n#{string}\n"""}.indent(@indent)
-        #      s = s.split("\n").map{|l| l =~ /^\s+$/ ? '' : l}.join("\n")
-        #      @io.puts(format_string(s, @current_step.status))
-        #      @io.flush
-        #    end
-        #
-        
       def exception(exception, status)
         @_context[:message] = exception.to_s
       end
 
       def before_multiline_arg(multiline_arg)
-        #      return if @options[:no_multiline] || @hide_this_step
-        #      @table = multiline_arg
       end
 
       def after_multiline_arg(multiline_arg)
