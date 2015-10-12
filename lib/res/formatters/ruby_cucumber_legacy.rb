@@ -50,7 +50,7 @@ module Res
            uri = feature.location.to_s
           end
           
-          hash = RubyCucumber.split_uri( uri )
+          hash = RubyCucumberLegacy.split_uri( uri )
           @_feature[:file] = hash[:file]
           @_feature[:line] = hash[:line]
           @_feature[:urn]  = hash[:urn]
