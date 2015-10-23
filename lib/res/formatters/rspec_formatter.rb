@@ -88,14 +88,12 @@ module Res
               result[:children][j][:children][k] = Hash.new
             end
               result[:children][j][:children][k] = add_result(group.children[j].examples[k].metadata)
-            # j += 1
               k += 1
             end
-
             i += 1
           end
-
         end
+
         result
       end
 
