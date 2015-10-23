@@ -46,19 +46,6 @@ module Res
         set_status(result, test.metadata[:location], status)
       end
 
-      def set_status(result, urn, status)
-        result.each do |r|
-          if r[:type] == "Rspec::Describe"
-            set_status(r[:children], urn, status)
-          elsif r[:type] == "Rspec::Test"
-            if r[:urn] == urn
-              r[:status] = status
-              break;
-            end
-          end
-        end
-      end
-
       def example_failed(failed_example_notification)
         status = failed_example_notification.example.metadata[:execution_result].status.to_s
         test = failed_example_notification.example
@@ -111,6 +98,20 @@ module Res
         end
         result
       end
+
+      def set_status(result, urn, status)
+        result.each do |r|
+          if r[:type] == "Rspec::Describe"
+            set_status(r[:children], urn, status)
+          elsif r[:type] == "Rspec::Test"
+            if r[:urn] == urn
+              r[:status] = status
+              break;
+            end
+          end
+        end
+      end
+	
 
       # Called At the end of the suite
       def stop(stop_notification)
