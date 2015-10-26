@@ -12,7 +12,6 @@ module Res
                                              
 
       def initialize output
-        @output = {}
         @result = Array.new
       end
 
@@ -20,7 +19,6 @@ module Res
       def start notification
         @count = 0
         @child = 0
-        @index = 0
       end
 
       # Called Once per example group
