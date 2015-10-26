@@ -25,18 +25,25 @@ module Res
 
       # Called Once per example group
       def example_group_started group_notification
-        if @child == 0
-         result[@count] = format_structure(group_notification.group)
-         @child += 1
-         @count += 1
-         i = 0
-         while i < group_notification.group.examples.count
-          result[@count] = add_result(group_notification.group.examples[i].metadata)
-          i += 1
+       if @child == 0
+          result[@count] = format_structure(group_notification.group)
+          @child += 1
+          i = 0
+          if result[@count].has_key?(:children)
+            index = result[@count][:children].count 
+          else
+            index =0
+          end
+          while i < group_notification.group.examples.count
+            result[@count][:children] = Array.new if !result[@count].has_key?(:children)
+            result[@count][:children][index] = Hash.new
+            result[@count][:children][index] = add_result(group_notification.group.examples[i].metadata)
+            index += 1
+            i += 1
+          end 
           @count += 1
-         end 
         end
-        @child -= 1
+        @child -= 1  
       end
    
       # Called One of these per example, depending on outcome
