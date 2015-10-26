@@ -3,7 +3,7 @@ require 'res/ir'
 
 module Res
   module Formatters
-    class RspecFormatter
+    class Rspec
      
       attr_accessor :output, :result
       RSpec::Core::Formatters.register self, :start, 
