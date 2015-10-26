@@ -1,8 +1,8 @@
 require 'res/ir'
 
 describe "I am describe" do
-EXAMPLE_FILE_JUNIT = 'spec/outputs/junit.res'
-let(:ir) { Res::IR.load( EXAMPLE_FILE_JUNIT ) }
+EXAMPLE_FILE_RSPEC = 'spec/outputs/rspec.res'
+let(:ir) { Res::IR.load( EXAMPLE_FILE_RSPEC) }
     describe "Describe#1" do
 
       it 'I am passing test#1' do
