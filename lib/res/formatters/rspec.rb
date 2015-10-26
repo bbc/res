@@ -12,7 +12,8 @@ module Res
                                              
 
       def initialize output
-        @result = Array.new
+	@io = output
+	@result = Array.new
       end
 
       # Called when rspec starts execution 
@@ -125,8 +126,9 @@ module Res
                             )
       end
 
+
       def start_dump(start_dump_notification)
-        @io = File.open("./rspec.res", "w")
+        @io = File.open("./rspec.res", "w") if @io.class.to_s != "File"
         @io.puts @ir.json
         @io.close
       end
