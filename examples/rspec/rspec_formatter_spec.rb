@@ -14,7 +14,7 @@ let(:ir) { Res::IR.load( EXAMPLE_FILE_JUNIT ) }
       end
     end
 
-    describe "#count" do
+    describe "Describe#2" do
       it "I am passing test#2" do
         expect(6).to equal(6)
       end
