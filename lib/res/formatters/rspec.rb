@@ -12,7 +12,7 @@ module Res
                                              
 
       def initialize output
-        @io = output
+	@io = output
 	@result = Array.new
       end
 
