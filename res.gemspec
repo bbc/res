@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'res'
-  s.version     = '1.1'
+  s.version     = '1.1.0'
   s.date        = Time.now.strftime("%Y-%m-%d")
   s.summary     = 'Test Result report libraries'
   s.description = 'Formatters, parsers, and submitters for test results'
