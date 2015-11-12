@@ -126,6 +126,7 @@ module Res
           @_feature_element[:status] = feature_element.status
         end
         @_feature_element[:finished] = Time.now
+        @_feature_element[:value] = Res.perf_data.pop if Res.perf_data
       end
 
       def before_background(background)
