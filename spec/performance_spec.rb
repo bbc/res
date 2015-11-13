@@ -5,8 +5,6 @@ describe Res.perf_data do
   it "Submit performance results to res" do
         `#{cucumber_command} features/performance.feature -f Res::Formatters::RubyCucumberLegacy -o out.res`
         ir = Res::IR.load("examples/cucumber/out.res")
-        require 'pry'
-        binding.pry
         expect(ir.tests.first).to have_key(:value)
       end
 end
