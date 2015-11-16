@@ -31,6 +31,10 @@ You can dump a Res IR results file using a cucumber formatter or parse xunit out
     cucumber -f pretty -f Res::Formatters::RubyCucumber -o './cucumber.res'
 Note: This cucumber formatter works for cucumber version < 2.0 
 
+## Rspec
+
+    rspec -f Res::Formatters::Rspec -o ./rspec.res
+    
 ## Junit
 
     ./bin/res.rb --junit '/path/to/xunit_result.xml'
