@@ -7,7 +7,7 @@ module Res
       @type = type
       set_type
     end
- 
+
     def set_type
       case @type
       when "Junit"
