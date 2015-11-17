@@ -16,6 +16,9 @@ module Res
       when "Cucumber"
         @context = ["Cucumber::Feature", "Cucumber::ScenarioOutline"]
         @case = ["Cucumber::Scenario"]
+      when "Rspec"
+        @context = ["Rspec::Describe"]
+        @case = ["Rspec::Test"]
       end
     end
 

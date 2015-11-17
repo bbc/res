@@ -43,5 +43,18 @@ describe Res::Reporters::TestRail do
 
     end
   end
+  
+  describe "Submitting Rspec results in testrail" do
+    describe "Create a new test run and submit results" do
+      
+      rspec_command  = "rspec examples/rspec/rspec_formatter_spec.rb"
 
+      it "Submit the test results", :if => File.exists?("./examples/cucumber/.test_rail.yaml") do
+        `#{rspec_command} -f Res::Formatters::Rspec -o ./rspec.res`
+        @output = `RUBYLIB=lib bundle exec ruby ./bin/res.rb --res ./rspec.res --submit testrail --config-file ./examples/cucumber/.test_rail.yaml`
+        expect( @output ).to include ("Submitted to Test Rail")
+      end
+
+    end
+  end
 end
