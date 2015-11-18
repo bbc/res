@@ -30,8 +30,8 @@ module Res
       end # initialize
 
       # Creates a new suite within testrail
-      def sync_tests(args)
-        @ir = args[:ir]
+      def sync_tests(ir)
+        @ir = ir
         @mappings = Res::Mappings.new(@ir.type)
 
         suite = @project.find_or_create_suite(:name => @suite_name, :id => @project.id)
@@ -49,8 +49,8 @@ module Res
 
       # Submits run against suite
       # Either creates a new run using run_name or use existing run_id 
-      def submit_results(args = {})
-        sync_tests(args) if !@synced
+      def submit_results(ir, args = {})
+        sync_tests(ir) if !@synced
         suite = @project.find_suite(:name => @suite_name)
 
         run_name = @config.run_name || args[:run_name] || nil

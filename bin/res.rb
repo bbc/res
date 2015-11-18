@@ -134,7 +134,7 @@ if options.reporter
       :ir          => ir
     )
  
-    output = reporter.submit_results(:ir => ir)
+    output = reporter.submit_results(ir)
     puts output
   else
 
