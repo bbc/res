@@ -32,3 +32,11 @@ build/
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+
+examples/cucumber/.test_rail.yaml
+examples/cucumber/.bundle/
+examples/cucumber/cucumber.res
+.test_rail.y*ml
+.testmine.y*ml
+.test_rail_reporter.log
+junit.res

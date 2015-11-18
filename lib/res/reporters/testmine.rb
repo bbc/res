@@ -14,7 +14,7 @@ module Res
         config.process(args)
       end
 
-      def submit_results(ir, args)
+      def submit_results(ir, args = nil)
         # Set missing project information
         ir.project     = config.project
         ir.suite       = config.suite
