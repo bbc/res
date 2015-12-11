@@ -128,7 +128,7 @@ module Res
         end
 
         @_feature_element[:finished] = Time.now
-        @_feature_element[:value] = Res.perf_data.pop if !Res.perf_data.empty?
+        @_feature_element[:values] = Res.perf_data.pop if !Res.perf_data.empty?
       end
 
       def before_background(background)
