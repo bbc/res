@@ -40,6 +40,10 @@ Note: This cucumber formatter works for cucumber version < 2.0
     ./bin/res.rb --junit '/path/to/xunit_result.xml'
 Note: The Res output of the xunit parser is saved in the current directory
 
+## Casper
+    ./bin/res.rb --junitcasper '/path/to/xunit_result.xml'
+Note: The Res output of the xunit parser is saved in the current directory
+
 ## Reporters
 
 There are a number of backend reporters, for taking IR and producing a report from
