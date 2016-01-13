@@ -3,6 +3,8 @@ require 'res/ir'
 # Res API
 module Res
 
+  @data = []
+
   # Report Res IR to a test repository or similar
   def self.submit_results(args)
     reporter_class = Res.reporter_class(args[:reporter])
@@ -43,6 +45,10 @@ module Res
       else
         raise "#{type} parser not Implemented"
     end
+  end
+
+  def self.perf_data
+    @data
   end
 
 end
