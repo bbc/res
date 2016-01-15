@@ -2,6 +2,8 @@ require 'res/config'
 
 EXAMPLE_CONFIG_FILE = 'blah'
 
+RSpec::Expectations.configuration.warn_about_potential_false_positives = false
+
 describe Res::Config do
 
   describe ".new" do
