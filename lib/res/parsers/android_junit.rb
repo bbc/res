@@ -58,23 +58,6 @@ module Res
         end
         result
       end
-
-      def add_case(test)
-        t_case = Hash.new
-        t_case[:type] = "AndroidJUnit::Test"
-        t_case[:name] = test.last
-        t_case[:status] = "passed"
-        t_case
-      end
-
-      def add_suite(class_name)
-        suite = Hash.new
-        suite[:type] = "AndroidJUnit::Class"
-        suite[:name] = class_name.last
-        suite[:children] = Array.new
-        suite
-      end
-
     end
   end
 end
