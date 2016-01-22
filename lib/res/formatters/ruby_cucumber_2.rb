@@ -1,6 +1,7 @@
 # Formatter for ruby cucumber
 
 require 'fileutils'
+require 'res'
 require 'res/ir'
 require 'cucumber/formatter/io'
 require 'cucumber/formatter/summary'
