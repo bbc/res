@@ -5,6 +5,7 @@ require 'res/reporters/testmine'
 require 'res/reporters/test_rail'
 require 'res/reporters/hive'
 require 'res/parsers/junit'
+require 'res/parsers/android_junit'
 require 'openssl'
 
 class CLIParser
@@ -33,6 +34,11 @@ class CLIParser
       opts.on("--junit junit_xml",
               "Parse junit xml to res type") do |junit|
         options.junit = junit
+      end
+
+      opts.on("--android_junit android_junit_output",
+              "Parse Android Junit output to res type") do |android_junit|
+        options.android_junit = android_junit
       end
 
       opts.on("--cert CERT",
@@ -84,7 +90,7 @@ class CLIParser
 
     opt_parser.parse!(args)
     options
-  end 
+  end
 end 
 
 options = CLIParser.parse(ARGV)
@@ -97,6 +103,11 @@ end
 if options.junit
     junit_output = Res::Parsers::Junit.new(options.junit)
     ir = Res::IR.load(junit_output.io)
+end 
+
+if options.android_junit
+    android_junit_output = Res::Parsers::AndroidJunit.new(options.android_junit)
+    ir = Res::IR.load(android_junit_output.io)
 end 
 
 raise "No results loaded" if !ir

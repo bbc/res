@@ -2,7 +2,7 @@ require 'res/ir'
 
 module Res
   module Parsers
-    class AndroidJUnit
+    class AndroidJunit
       attr_accessor :io
      
       def initialize(instrument_output)
@@ -21,30 +21,39 @@ module Res
       def parse(output)
         class_name = Array.new
         test = Array.new
-        count = 0
         result = Array.new
+        test = {
+          type: "AndroidJUnit::Test",
+          name: 'UNKNOWN',
+          status: "passed"
+        }
         File.open(output) do |f|
           f.each_line do |line|
+            if line.include?("INSTRUMENTATION_STATUS_CODE")
+              # TODO Check that this indicates the end of test information
+              result.last[:children] << test
+              test = {
+                type: "AndroidJUnit::Test",
+                name: 'UNKNOWN',
+                status: "passed"
+              }
+            end
+
             if line.include?("class")
               line = line.gsub("INSTRUMENTATION_STATUS: class=", "").strip
               if !class_name.include? line
                 class_name.push(line) 
-                result[count] = add_suite(class_name)
-                count += 1
+                result << {
+                  type: "AndroidJUnit::Class",
+                  name: class_name.last,
+                  children: Array.new
+                }
               end
             elsif line.include?("test=")
-                line = line.gsub("INSTRUMENTATION_STATUS: test=", "").strip
-                test.push(line)
-                if !line.empty? and !class_name.include? line
-                  c = result[count - 1][:children].count
-                  result[count - 1][:children][c] = add_case(test)
-                end
+              test[:name] = line.gsub("INSTRUMENTATION_STATUS: test=", "").strip
             elsif line.include?("Error in ")
-                c = result[count - 1][:children].count
-                result[count - 1][:children][c - 1][:status] = "failed"
+              test[:status] = 'failed'
             end
-
-
           end
         end
         result
