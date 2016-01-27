@@ -13,7 +13,7 @@ module Res
 
       def initialize output
       	@io = output
-      	@result = Array.new
+        @result = Array.new
         @start_time = Time.now
       end
 
