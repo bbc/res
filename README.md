@@ -83,6 +83,8 @@ Your config file should be called .test_rail.yaml, and should look like this:
     suite:     'MySuite'
     run_name:  'RunName' or run_id:    '1234'
 
+Note: Above parameters can also be set through environment as TESTRAIL_#{PARAMETER} instead of config file.
+
 ### Testmine 
 
 The Testmine reporter is very similar to the TestRail reporter, but doesn't 
@@ -96,6 +98,8 @@ should be called .testmine.yaml, and should look like this:
     project:   'MyProjectName'
     component: 'Android acceptance'
     suite:     'MySuiteName'
+
+Note: Above parameters can also be set through environment as TESTMINE_#{PARAMETER} instead of config file.
 
 ## License
 
