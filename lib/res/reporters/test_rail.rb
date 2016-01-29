@@ -10,7 +10,7 @@ module Res
       attr_accessor :ir, :case_status, :config, :project, :suite
       def initialize(args)
         @url = args[:url]
-        @config = Res::Config.new([:user, :password, :namespace, :project, :suite], :optional => [:run_id, :run_name], :pre_env => 'test_rail')
+        @config = Res::Config.new([:user, :password, :namespace, :project, :suite], :optional => [:run_id, :run_name], :pre_env => 'testrail_')
         config.process(args)
 
         @case_status = {}
