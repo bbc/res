@@ -70,6 +70,7 @@ module Res
           "type": "Rspec::Test",
           "name": test[:description],
           "urn": test[:location],
+          "status": "not run"
         }
       end
 
