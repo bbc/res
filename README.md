@@ -37,11 +37,11 @@ Note: This cucumber formatter works for cucumber version < 2.0
     
 ## Junit
 
-    ./bin/res.rb --junit '/path/to/xunit_result.xml'
+    res.rb --junit '/path/to/xunit_result.xml'
 Note: The Res output of the xunit parser is saved in the current directory
 
 ## Casper
-    ./bin/res.rb --junitcasper '/path/to/xunit_result.xml'
+    res.rb --junitcasper '/path/to/xunit_result.xml'
 Note: The Res output of the xunit parser is saved in the current directory
 
 ## Reporters
@@ -52,7 +52,7 @@ tool.
 
 If you have a Res IR file, you can submit using a reporter: 
 
-    ./bin/res.rb --res '/path/to/file.res' --submit REPORTER [... options]
+    res.rb --res '/path/to/file.res' --submit REPORTER [... options]
 
 ### Hive
 
@@ -67,7 +67,7 @@ Hive CI uses a Res reporter for result submission, the api arguments look like t
 
 ### TestRail
 
-    ./bin/res.rb --res '/path/to/file.res' --submit testrail --config-file '/path/to/.test_rail.yaml'
+    res.rb --res '/path/to/file.res' --submit testrail --config-file '/path/to/.test_rail.yaml'
 
 Our TestRail reporter currently be used to sync a suite with TestRail, and
 to submit test results against a test run. You will need to create a
