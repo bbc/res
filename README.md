@@ -28,8 +28,8 @@ You can dump a Res IR results file using a cucumber formatter or parse xunit out
 
 ## Cucumber
 
-    cucumber -f pretty -f Res::Formatters::RubyCucumber -o './cucumber.res'
-Note: This cucumber formatter works for cucumber version < 2.0 
+    cucumber -f pretty -f Res::Formatters::RubyCucumber -o './cucumber.res'  (cucumber version < 2.0)
+    cucumber -f pretty -f Res::Formatters::RubyCucumber2 -o './cucumber.res' (cucumber version >= 2.0)
 
 ## Rspec
 
