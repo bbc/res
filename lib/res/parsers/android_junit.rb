@@ -30,7 +30,6 @@ module Res
         File.open(output) do |f|
           f.each_line do |line|
             if line.include?("INSTRUMENTATION_STATUS_CODE")
-              # TODO Check that this indicates the end of test information
               result.last[:children] << test
               test = {
                 type: "AndroidJUnit::Test",
