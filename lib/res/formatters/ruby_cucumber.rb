@@ -1,19 +1,22 @@
 # Formatter for ruby cucumber
 
 require 'fileutils'
+require 'res'
 require 'res/ir'
 require 'cucumber/formatter/io'
-require 'cucumber/formatter/summary'
 
 module Res
   module Formatters
     class RubyCucumber
       include FileUtils
       include ::Cucumber::Formatter::Io
-     
+
       def initialize(runtime, path_or_io, options)
+        cucumber_version = %x(cucumber --version)
+        @cucumber_version = cucumber_version.gsub("\n","") 
+        
         @runtime = runtime
-        @io = ensure_io(path_or_io) 
+        @io = ensure_io(path_or_io, "reporter")
         @options = options
         @exceptions = []
         @indent = 0
@@ -42,7 +45,13 @@ module Res
         @_context = {}
         @_feature[:started] = Time.now()
         begin
-          hash = RubyCucumber.split_uri( feature.location.to_s )
+          if @cucumber_version.to_f < 1.3.to_f
+            uri = feature.file.to_s
+          else  
+           uri = feature.location.to_s
+          end
+          
+          hash = RubyCucumber.split_uri( uri )
           @_feature[:file] = hash[:file]
           @_feature[:line] = hash[:line]
           @_feature[:urn]  = hash[:urn]
@@ -90,7 +99,12 @@ module Res
         @_context = {}
         @_feature_element[:started] = Time.now
         begin
-          hash = RubyCucumber.split_uri( feature_element.location.to_s )
+          if @cucumber_version.to_f < 1.3.to_f
+            uri = feature_element.file_colon_line
+          else  
+            uri = feature_element.location.to_s
+          end
+          hash = RubyCucumber.split_uri( uri )
           @_feature_element[:file] = hash[:file]
           @_feature_element[:line] = hash[:line]
           @_feature_element[:urn] = hash[:urn]
@@ -109,29 +123,14 @@ module Res
       def after_feature_element(feature_element)
         @_context = {}
 
-        scenario_class = Cucumber::Formatter::LegacyApi::Ast::Scenario
-        example_table_class = Cucumber::Core::Ast::Location
-
-        fail =  @runtime.scenarios(:failed).select do |s|
-          [scenario_class, example_table_class].include?(s.class)
-        end.map do |s|
-          if s.location == feature_element.location
-            s
-          end          
+        if feature_element.respond_to? :status
+          @_feature_element[:status] = feature_element.status
         end
-
-        if fail.compact.empty? and feature_element.respond_to? :status
-          @_feature_element[:status] = feature_element.status if feature_element.status.to_s != "skipped"
-        else
-          fail = fail.compact
-          @_feature_element[:status] = fail[0].status
-        end
-
         @_feature_element[:finished] = Time.now
+        @_feature_element[:values] = Res.perf_data.pop if !Res.perf_data.empty?
       end
 
       def before_background(background)
-        #@_context[:background] = background
       end
 
       def after_background(background)
@@ -142,7 +141,6 @@ module Res
 
       def examples_name(keyword, name)
       end
-
 
       def scenario_name(keyword, name, file_colon_line, source_indent)
         @_context[:type] = "Cucumber::" + keyword.gsub(/\s+/, "")
@@ -163,6 +161,7 @@ module Res
         @_context = @_step
       end
 
+      # Argument list changed after cucumber 1.4, hence the *args
       def step_name(keyword, step_match, status, source_indent, background, *args)
 
         file_colon_line = args[0] if args[0]
@@ -171,11 +170,10 @@ module Res
         name = keyword + step_match.format_args(lambda{|param| %{#{param}}}) 
         @_step[:name] = name
         @_step[:status] = status
-        #@_step[:background] = background
         @_step[:type] = "Cucumber::Step"
 
       end
-        
+
       def exception(exception, status)
         @_context[:message] = exception.to_s
       end
@@ -210,17 +208,14 @@ module Res
       end
 
       def after_table_row(table_row)
-	if table_row.class == Cucumber::Formatter::LegacyApi::Ast::ExampleTableRow
-
+        if table_row.class == Cucumber::Ast::OutlineTable::ExampleRow
           @_current_table_row[:name] = table_row.name
           if table_row.exception
             @_current_table_row[:message] = table_row.exception.to_s
           end
-
-          if table_row.status and table_row.status != "skipped" and table_row.status != nil
+          if table_row.scenario_outline
             @_current_table_row[:status] = table_row.status
           end
-            
           @_current_table_row[:line] = table_row.line
           @_current_table_row[:urn] = @_feature_element[:file] + ":" + table_row.line.to_s
           @_table << @_current_table_row

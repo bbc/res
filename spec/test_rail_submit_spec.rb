@@ -7,7 +7,7 @@ describe Res::Reporters::TestRail do
   describe "Submitting Junit results in testrail" do
     describe "Create a new test run and submit results" do
       
-      junit_command = "RUBYLIB=lib bundle exec ruby ./bin/res.rb --junit './examples/junit/junittests.xml' --submit testrail --config-file ./examples/cucumber/.test_rail.yaml"
+      junit_command = "res --junit './examples/junit/junittests.xml' --submit testrail --config-file ./examples/cucumber/.test_rail.yaml"
       
       it "Skipping tests", :if => !File.exists?("./examples/cucumber/.test_rail.yaml") do
         puts "Create file ./examples/cucumber/.test_rail.yaml with below template
@@ -36,8 +36,8 @@ describe Res::Reporters::TestRail do
       cucumber_command = "unset BUNDLE_GEMFILE; unset RUBYOPT; cd examples/cucumber; bundle install --without production test > /dev/null && VERSION=12 TARGET=nothing bundle exec cucumber"
 
       it "Submit the test results", :if => File.exists?("./examples/cucumber/.test_rail.yaml") do
-        `#{cucumber_command} features/tags.feature -f Res::Formatters::RubyCucumberLegacy -o ./cucumber.res`
-        @output = `unset BUNDLE_GEMFILE; unset RUBYOPT; RUBYLIB=lib bundle exec ruby ./bin/res.rb --res examples/cucumber/cucumber.res --submit testrail --config-file ./examples/cucumber/.test_rail.yaml`
+        `#{cucumber_command} features/tags.feature -f Res::Formatters::RubyCucumber -o ./cucumber.res`
+        @output = `unset BUNDLE_GEMFILE; unset RUBYOPT; res --res examples/cucumber/cucumber.res --submit testrail --config-file ./examples/cucumber/.test_rail.yaml`
         expect( @output ).to include ("Submitted to Test Rail")
       end
 
@@ -51,7 +51,7 @@ describe Res::Reporters::TestRail do
 
       it "Submit the test results", :if => File.exists?("./examples/cucumber/.test_rail.yaml") do
         `#{rspec_command} -f Res::Formatters::Rspec -o ./rspec.res`
-        @output = `RUBYLIB=lib bundle exec ruby ./bin/res.rb --res ./rspec.res --submit testrail --config-file ./examples/cucumber/.test_rail.yaml`
+        @output = `res --res ./rspec.res --submit testrail --config-file ./examples/cucumber/.test_rail.yaml`
         expect( @output ).to include ("Submitted to Test Rail")
       end
 

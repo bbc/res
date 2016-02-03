@@ -2,6 +2,7 @@ require 'res/config'
 
 EXAMPLE_CONFIG_FILE = 'blah'
 
+
 describe Res::Config do
 
   describe ".new" do

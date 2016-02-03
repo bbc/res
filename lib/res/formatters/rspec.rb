@@ -5,15 +5,16 @@ module Res
   module Formatters
     class Rspec
      
-      attr_accessor :output, :result
+      attr_accessor :output, :result, :start_time
       RSpec::Core::Formatters.register self, :start, 
                                              :example_group_started, :example_passed, :example_failed, :example_pending, 
                                              :stop, :start_dump
                                              
 
       def initialize output
-	@io = output
-	@result = Array.new
+      	@io = output
+        @result = Array.new
+        @start_time = Time.now
       end
 
       # Called when rspec starts execution 
@@ -120,7 +121,7 @@ module Res
       # Called At the end of the suite
       def stop(stop_notification)
         @ir = ::Res::IR.new( :type        => 'Rspec',
-                            :started     => '',
+                            :started     => @start_time,
                             :results     => result,
                             :finished    => Time.now(),
                             )
