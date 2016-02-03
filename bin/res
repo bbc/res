@@ -99,7 +99,7 @@ class CLIParser
     opt_parser.parse!(args)
     options
   end
-end 
+end
 
 options = CLIParser.parse(ARGV)
 
