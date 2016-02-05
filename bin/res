@@ -6,6 +6,7 @@ require 'res/ir'
 require 'res/reporters/testmine'
 require 'res/reporters/test_rail'
 require 'res/reporters/hive'
+require 'res/reporters/lion'
 require 'res/parsers/junit'
 require 'res/parsers/android_junit'
 require 'res/parsers/junitcasper'
@@ -84,6 +85,11 @@ class CLIParser
         options.version = version
       end
 
+      opts.on("--app_name app_name",
+              "app_name to be submitted to Lion Dashboard") do |app_name|
+        options.app_name = app_name
+      end
+
       opts.on("--target TARGET",
               "Target of execution (e.g. Chrome)") do |target|
         options.target = target
@@ -154,6 +160,17 @@ if options.reporter
       reporter = Res::Reporters::TestRail.new(
           :config_file => options.config_file,
           :target      => options.target,
+          :url         => options.url,
+          :ir          => ir
+      )
+
+      output = reporter.submit_results(ir)
+      puts output
+    when 'lion'
+      reporter = Res::Reporters::Lion.new(
+        #  :config_file => options.config_file,
+        #  :target      => options.target,
+          :app_name    => options.app_name, 
           :url         => options.url,
           :ir          => ir
       )
