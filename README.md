@@ -35,13 +35,10 @@ You can dump a Res IR results file using a cucumber formatter or parse xunit out
 
     rspec -f Res::Formatters::Rspec -o ./rspec.res
     
-## Junit
+## Android Junit (output from Instruments test), Junit and Casper
 
+    res --android_junit '/path/to/instruments.out'
     res --junit '/path/to/xunit_result.xml'
-Note: The Res output of the xunit parser is saved in the current directory
-
-## Casper
-
     res --junitcasper '/path/to/xunit_result.xml'
 Note: The Res output of the xunit parser is saved in the current directory
 
