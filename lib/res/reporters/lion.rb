@@ -28,6 +28,7 @@ module Res
         # Set Lion Data
         lion_data = {
           :app_name => config.app_name,
+          :queue_name => ENV["HIVE_QUEUE_NAME"],
           :type => ir.type,
           :started => ir.results.first[:started],
           :finished => ir.results.last[:finished],
