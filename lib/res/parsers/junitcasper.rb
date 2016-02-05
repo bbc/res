@@ -20,7 +20,7 @@ module Res
           create_multiple_test_suite(test_suites)
         end
         ir = ::Res::IR.new(:type => 'Casper',
-                           :started => "",
+                           :started => Time.now(),
                            :finished => Time.now(),
                            :results => @test_suites
         )
