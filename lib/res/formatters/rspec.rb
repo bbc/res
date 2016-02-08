@@ -67,9 +67,9 @@ module Res
 
       def add_result(test)
         {
-          'type' => 'Rspec::Test',
-          'name' => test[:description],
-          'urn'  => test[:location]
+          type: "Rspec::Test",
+          name: test[:description],
+          urn: test[:location]
         }
       end
 
