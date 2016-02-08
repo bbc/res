@@ -26,6 +26,11 @@ module Res
       when :testmine
         require 'res/reporters/testmine'
         Res::Reporters::Testmine
+      when :lion
+        require 'res/reporters/lion'
+        Res::Reporters::Lion
+      else 
+        raise "Invalid Reporter type"
     end
   end
 
