@@ -8,8 +8,8 @@ module Res
 
       def initialize(args)
         @url = args[:url]
-        @config = Res::Config.new([:url, :tag, :description, :app_name, :queue],
-                                  :optional => [:hive_job_id],
+        @config = Res::Config.new([:url, :tag, :description, :app_name],
+                                  :optional => [:hive_job_id, :queue],
                                   :pre_env  => 'LION_')
         config.process(args)
       end
@@ -30,7 +30,7 @@ module Res
           :app_name => config.app_name,
           :tag => config.tag,
           :description => config.description,
-          :queue_name => config.queue || ENV["HIVE_QUEUE_NAME"],
+          :queue_name => ENV["HIVE_QUEUE_NAME"] || config.queue,
           :type => ir.type,
           :started => ir.results.first[:started],
           :finished => ir.results.last[:finished],
