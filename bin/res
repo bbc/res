@@ -85,11 +85,6 @@ class CLIParser
         options.version = version
       end
 
-      opts.on("--app_name app_name",
-              "app_name to be submitted to Lion Dashboard") do |app_name|
-        options.app_name = app_name
-      end
-
       opts.on("--target TARGET",
               "Target of execution (e.g. Chrome)") do |target|
         options.target = target
