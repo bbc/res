@@ -169,8 +169,6 @@ if options.reporter
     when 'lion'
       reporter = Res::Reporters::Lion.new(
           :config_file => options.config_file,
-        #  :target      => options.target,
-        #  :app_name    => options.app_name, 
           :url         => options.url,
           :ir          => ir
       )
