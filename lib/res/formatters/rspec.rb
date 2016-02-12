@@ -65,11 +65,11 @@ module Res
         set_status(result, test.metadata[:location], status)
       end
 
-        def add_result(test)
-       return { 
-          "type": "Rspec::Test",
-          "name": test[:description],
-          "urn": test[:location],
+      def add_result(test)
+        {
+          type: "Rspec::Test",
+          name: test[:description],
+          urn: test[:location]
         }
       end
 
@@ -123,7 +123,7 @@ module Res
         @ir = ::Res::IR.new( :type        => 'Rspec',
                             :started     => @start_time,
                             :results     => result,
-                            :finished    => Time.now(),
+                            :finished    => Time.now()
                             )
       end
 
