@@ -8,7 +8,7 @@ module Res
 
       def initialize(args)
         @url = args[:url]
-        @config = Res::Config.new([:url, :app_name],
+        @config = Res::Config.new([:url, :tag, :description, :app_name, :queue],
                                   :optional => [:hive_job_id],
                                   :pre_env  => 'LION_')
         config.process(args)
@@ -24,11 +24,13 @@ module Res
           values[count] = ir.tests[count][:values]
           count += 1
         end
-
+ 
         # Set Lion Data
         lion_data = {
           :app_name => config.app_name,
-          :queue_name => ENV["HIVE_QUEUE_NAME"],
+          :tag => config.tag,
+          :description => config.description,
+          :queue_name => config.queue || ENV["HIVE_QUEUE_NAME"],
           :type => ir.type,
           :started => ir.results.first[:started],
           :finished => ir.results.last[:finished],
