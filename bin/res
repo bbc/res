@@ -6,6 +6,7 @@ require 'res/ir'
 require 'res/reporters/testmine'
 require 'res/reporters/test_rail'
 require 'res/reporters/hive'
+require 'res/reporters/lion'
 require 'res/parsers/junit'
 require 'res/parsers/android_junit'
 require 'res/parsers/junitcasper'
@@ -154,6 +155,15 @@ if options.reporter
       reporter = Res::Reporters::TestRail.new(
           :config_file => options.config_file,
           :target      => options.target,
+          :url         => options.url,
+          :ir          => ir
+      )
+
+      output = reporter.submit_results(ir)
+      puts output
+    when 'lion'
+      reporter = Res::Reporters::Lion.new(
+          :config_file => options.config_file,
           :url         => options.url,
           :ir          => ir
       )
