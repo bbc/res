@@ -1,6 +1,10 @@
+$:.push File.expand_path('../lib', __FILE__)
+
+require 'res/version'
+
 Gem::Specification.new do |s|
   s.name        = 'res'
-  s.version     = '1.2.2'
+  s.version     = Res::VERSION
   s.date        = Time.now.strftime("%Y-%m-%d")
   s.summary     = 'Test Result report libraries'
   s.description = 'Formatters, parsers, and submitters for test results'

@@ -90,6 +90,11 @@ class CLIParser
         options.target = target
       end
 
+      opts.on_tail("-V", "--res_version", "Display the version of Res") do
+        puts Res::VERSION
+        exit
+      end
+
       opts.on_tail("-h", "--help", "Display help") do
         puts opts
         exit
