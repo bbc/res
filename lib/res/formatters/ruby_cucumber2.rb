@@ -21,6 +21,7 @@ module Res
         @prefixes = options[:prefixes] || {}
         @delayed_messages = []
         @_start_time = Time.now
+        @already_seen = []
       end
 
       def before_features(features)
@@ -86,7 +87,6 @@ module Res
       end
 
       def before_feature_element(feature_element)
-
         @_feature_element = {}
         @_context = {}
         @_feature_element[:started] = Time.now
@@ -106,28 +106,16 @@ module Res
         @_context = @_feature_element
       end
 
+      def any_fails?
+        new_scenarios = @runtime.scenarios - @already_seen
+        @already_seen += @runtime.scenarios
+        new_scenarios.map { |s| s.status }.include? :failed
+      end
+
       # After a scenario
       def after_feature_element(feature_element)
         @_context = {}
-
-        scenario_class = Cucumber::Formatter::LegacyApi::Ast::Scenario
-        example_table_class = Cucumber::Core::Ast::Location
-
-        fail =  @runtime.scenarios(:failed).select do |s|
-          [scenario_class, example_table_class].include?(s.class)
-        end.map do |s|
-          if s.location == feature_element.location
-            s
-          end          
-        end
-
-        if fail.compact.empty? and feature_element.respond_to? :status
-          @_feature_element[:status] = feature_element.status if feature_element.status.to_s != "skipped"
-        else
-          fail = fail.compact
-          @_feature_element[:status] = fail[0].status
-        end
-
+        @_feature_element[:status] = any_fails? ? :failed : feature_element.status
         @_feature_element[:finished] = Time.now
         @_feature_element[:values] = Res.perf_data.pop if !Res.perf_data.empty?
       end
