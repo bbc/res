@@ -116,7 +116,7 @@ module Res
         fail =  @runtime.scenarios(:failed).select do |s|
           [scenario_class, example_table_class].include?(s.class)
         end.map do |s|
-          if s.location == feature_element.location
+          if s.location.file == feature_element.location.file
             s
           end          
         end
