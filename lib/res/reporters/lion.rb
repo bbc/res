@@ -9,7 +9,7 @@ module Res
       def initialize(args)
         @url = args[:url]
         @config = Res::Config.new([:url, :tag, :description, :app_name],
-                                  :optional => [:hive_job_id, :queue],
+                                  :optional => [:hive_job_id, :queue, :cert, :cacert, :ssl_verify_mode],
                                   :pre_env  => 'LION_')
         config.process(args)
       end
@@ -37,17 +37,24 @@ module Res
           :status => status,
           :perf_values => values.compact!
         }
+        
+        
         uri = URI.parse(config.url)
-        net = Net::HTTP.new(uri.host, uri.port)
-        request = Net::HTTP::Post.new("/import")
-        request.set_form_data(lion_data)
-
-        net.read_timeout = 60
-        net.open_timeout = 10
-
-        response = net.start do |http|
-          http.request(request)
+        @http = Net::HTTP.new(uri.host, uri.port)
+        if config.cert
+          pem = File.read(config.cert)
+          @http.use_ssl = true if uri.scheme == 'https'
+          @http.cert = OpenSSL::X509::Certificate.new(pem)
+          @http.key = OpenSSL::PKey::RSA.new(pem)
+          @http.ca_file = config.cacert if config.cacert
+          @http.verify_mode = config.ssl_verify_mode if config.ssl_verify_mode
         end
+        
+        request = Net::HTTP::Post.new(config.url + "/import")
+        request.content_type = 'application/json'
+        request.body = lion_data.to_json
+
+        @http.request(request)
       end
 
     end

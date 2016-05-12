@@ -170,6 +170,9 @@ if options.reporter
       reporter = Res::Reporters::Lion.new(
           :config_file => options.config_file,
           :url         => options.url,
+          :cert        => options.cert,
+          :cacert      => options.cacert,
+          :ssl_verify_mode => options.ssl_verify_mode,
           :ir          => ir
       )
 
