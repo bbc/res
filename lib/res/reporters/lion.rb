@@ -8,7 +8,7 @@ module Res
 
       def initialize(args)
         @url = args[:url]
-        @config = Res::Config.new([:url, :tag, :description, :app_name],
+        @config = Res::Config.new([:url, :tag, :description, :app_name, :target],
                                   :optional => [:hive_job_id, :queue, :cert, :cacert, :ssl_verify_mode],
                                   :pre_env  => 'LION_')
         config.process(args)
@@ -30,7 +30,7 @@ module Res
           :app_name => config.app_name,
           :tag => config.tag,
           :description => config.description,
-          :queue_name => ENV["HIVE_QUEUE_NAME"] || config.queue,
+          :queue_name => config.target,
           :type => ir.type,
           :started => ir.results.first[:started],
           :finished => ir.results.last[:finished],
