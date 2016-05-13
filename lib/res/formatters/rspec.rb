@@ -1,6 +1,6 @@
 require 'rspec/core/formatters'
 require 'res/ir'
-require 'pry'
+
 module Res
   module Formatters
     class Rspec
