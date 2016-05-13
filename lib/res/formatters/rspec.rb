@@ -1,6 +1,6 @@
 require 'rspec/core/formatters'
 require 'res/ir'
-
+require 'pry'
 module Res
   module Formatters
     class Rspec
@@ -99,8 +99,7 @@ module Res
             end
             i += 1
           end
-        end
-
+          result[:values] = Res.perf_data.pop if !Res.perf_data.empty?
         result
       end
 
