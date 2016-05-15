@@ -99,8 +99,8 @@ module Res
             end
             i += 1
           end
-        end
-
+          result[:values] = Res.perf_data.pop if !Res.perf_data.empty?
+	end
         result
       end
 
