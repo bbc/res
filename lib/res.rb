@@ -56,4 +56,8 @@ module Res
     @data
   end
 
+  def self.perf_data= data
+    @data = data
+  end
+
 end
