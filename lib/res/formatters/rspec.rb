@@ -109,6 +109,11 @@ module Res
       def set_status(result, urn, status)
         result.each do |r|
           if r[:type] == "Rspec::Describe"
+            r[:values] ||= {}
+            Res.perf_data.each do |p|
+              r[:values].merge! p
+            end
+            Res.perf_data = []
             set_status(r[:children], urn, status)
           elsif r[:type] == "Rspec::Test"
             if r[:urn] == urn
@@ -116,12 +121,6 @@ module Res
               break;
             end
           end
-
-          r[:values] ||= {}
-          Res.perf_data.each do |p|
-            r[:values].merge! p
-          end
-          Res.perf_data = []
         end
       end
 	
