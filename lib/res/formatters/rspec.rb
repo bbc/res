@@ -7,7 +7,10 @@ module Res
      
       attr_accessor :output, :result, :start_time
       RSpec::Core::Formatters.register self, :start, 
-                                             :example_group_started, :example_passed, :example_failed, :example_pending, 
+                                             :example_group_started,
+                                             :example_passed,
+                                             :example_failed,
+                                             :example_pending, 
                                              :stop, :start_dump
                                              
 
@@ -99,14 +102,20 @@ module Res
             end
             i += 1
           end
-          result[:values] = Res.perf_data.pop if !Res.perf_data.empty?
-	end
+        end
         result
       end
 
       def set_status(result, urn, status)
         result.each do |r|
           if r[:type] == "Rspec::Describe"
+            if Res.perf_data.size > 0
+              r[:values] ||= {}
+              Res.perf_data.each do |p|
+                r[:values].merge! p
+              end
+              Res.perf_data = []
+            end
             set_status(r[:children], urn, status)
           elsif r[:type] == "Rspec::Test"
             if r[:urn] == urn
