@@ -2,7 +2,7 @@ require 'json'
 
 module Res
   class IR
-    attr_accessor :hash, :results, :type, :start_time, :end_time, :world
+    attr_accessor :hash, :results, :type, :start_time, :end_time, :world, :values
     attr_accessor :project, :suite, :target, :hive_job_id
  
     def self.load(file)
@@ -21,8 +21,28 @@ module Res
       @type        = options[:type]        or raise "No type provided (e.g. 'Cucumber')"
       @started     = options[:started]     or raise "Need to provide a start time"
       @finished    = options[:finished]    or raise "Need to provide an end time"
+      @values      = initialize_values( options[:values], options[:results] )
     end
-
+    
+    def initialize_values( initial_values, results_hash )
+      h = {}
+      if initial_values && !initial_values.empty?
+        initial_values.each do |k,v|
+          h[k.to_s] = v
+        end
+      end
+      
+      IR.find_values( results_hash ).each do |i|
+        if !i.empty?
+          i.each do |k,v|
+            h[k.to_s] = v
+          end           
+        end
+      end
+      
+      h
+    end
+    
     # Dump as json
     def json
       hash = {
@@ -59,6 +79,20 @@ module Res
     end
     
     private
+    
+    # Recursive function for retrieving values in nodes
+    def self.find_values(nodes)
+      value_hashes = []
+      nodes.each do |n|
+        if n[:values]
+          value_hashes << n[:values]
+        end
+        if n[:children]
+          value_hashes += IR.find_values(n[:children])
+        end
+      end
+      value_hashes
+    end
     
     # Recursive function for retrieving test nodes
     def self.find_tests(nodes)
