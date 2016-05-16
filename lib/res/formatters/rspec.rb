@@ -102,7 +102,7 @@ module Res
             end
             i += 1
           end
-	      end
+        end
         result
       end
 
