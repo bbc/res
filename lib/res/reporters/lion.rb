@@ -18,22 +18,6 @@ module Res
         status = "failed"
         status = "passed" if ir.tests.count == ir.count(:passed)
 
-        count = 0
-        values = Array.new
-        while count < ir.tests.count
-          values[count] = ir.tests[count][:values]
-          count += 1
-        end
-       
-        perf_values = {}
-        ir.tests.collect do |t|
-          if values = t[:values]
-            values.each do |k,v|
-              perf_values[k] = v if v.is_a? Numeric
-            end
-          end
-        end
-
         # Set Lion Data
         lion_data = {
           :app_name => config.app_name,
@@ -44,7 +28,7 @@ module Res
           :started => ir.results.first[:started],
           :finished => ir.results.last[:finished],
           :status => status,
-          :measures => perf_values
+          :measures => ir.values
         }
         
         
