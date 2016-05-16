@@ -7,7 +7,10 @@ module Res
      
       attr_accessor :output, :result, :start_time
       RSpec::Core::Formatters.register self, :start, 
-                                             :example_group_started, :example_passed, :example_failed, :example_pending, 
+                                             :example_group_started,
+                                             :example_passed,
+                                             :example_failed,
+                                             :example_pending, 
                                              :stop, :start_dump
                                              
 
@@ -99,8 +102,7 @@ module Res
             end
             i += 1
           end
-          result[:values] = Res.perf_data.pop if !Res.perf_data.empty?
-	end
+	      end
         result
       end
 
@@ -114,6 +116,12 @@ module Res
               break;
             end
           end
+
+          r[:values] ||= {}
+          Res.perf_data.each do |p|
+            r[:values].merge! p
+          end
+          Res.perf_data = []
         end
       end
 	
