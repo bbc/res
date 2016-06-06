@@ -8,7 +8,7 @@ module Res
 
       def initialize(args)
         @url = args[:url]
-        @config = Res::Config.new([:url, :tag, :description, :app_name, :target],
+        @config = Res::Config.new([:url, :tag, :device_type, :description, :app_name, :target],
                                   :optional => [:hive_job_id, :queue, :cert, :cacert, :ssl_verify_mode],
                                   :pre_env  => 'LION_')
         config.process(args)
@@ -22,6 +22,7 @@ module Res
         lion_data = {
           :app_name => config.app_name,
           :tag => config.tag,
+          :device_type => config.device_type,
           :description => config.description,
           :queue_name => config.target,
           :type => ir.type,
