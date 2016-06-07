@@ -8,8 +8,11 @@ module Res
 
       def initialize(args)
         @url = args[:url]
+        # :device_type is optional for backward compatibility
+        # At the next major version update this should be moved into the
+        # required list.
         @config = Res::Config.new([:url, :tag, :description, :app_name, :target],
-                                  :optional => [:hive_job_id, :queue, :cert, :cacert, :ssl_verify_mode],
+                                  :optional => [:hive_job_id, :queue, :cert, :cacert, :ssl_verify_mode, :device_type],
                                   :pre_env  => 'LION_')
         config.process(args)
       end
@@ -22,6 +25,7 @@ module Res
         lion_data = {
           :app_name => config.app_name,
           :tag => config.tag,
+          :device_type => config.device_type || 'Unknown',
           :description => config.description,
           :queue_name => config.target,
           :type => ir.type,
