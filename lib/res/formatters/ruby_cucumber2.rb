@@ -15,10 +15,10 @@ module Res
       def initialize(runtime, path_or_io, options)
         @runtime = runtime
         begin
-		      @io = ensure_io(path_or_io) 
-	      rescue
-		      @io = ensure_io(path_or_io, '')
-	      end
+         @io = ensure_io(path_or_io) 
+        rescue
+         @io = ensure_io(path_or_io, '')
+        end
         @options = options
         @exceptions = []
         @indent = 0
@@ -216,7 +216,7 @@ module Res
       end
 
       def after_table_row(table_row)
-	if table_row.class == Cucumber::Formatter::LegacyApi::Ast::ExampleTableRow
+ if table_row.class == Cucumber::Formatter::LegacyApi::Ast::ExampleTableRow
 
           @_current_table_row[:name] = table_row.name
           if table_row.exception
