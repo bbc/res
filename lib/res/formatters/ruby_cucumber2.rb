@@ -15,10 +15,10 @@ module Res
       def initialize(runtime, path_or_io, options)
         @runtime = runtime
         begin
-         @io = ensure_io(path_or_io) 
+          @io = ensure_io(path_or_io) 
         rescue
-         @io = ensure_io(path_or_io, '')
-       end
+          @io = ensure_io(path_or_io, '')
+        end
         @options = options
         @exceptions = []
         @indent = 0
