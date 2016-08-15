@@ -1,0 +1,87 @@
+INSTRUMENTATION_STATUS: numtests=57
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: test=testWhenAContainerIsBoundWithAGalleryViewModel_theTheToolbarHidesWhenTapped
+INSTRUMENTATION_STATUS: class=uk.co.bbc.mafsample.containertests.LightboxContainerTest
+INSTRUMENTATION_STATUS: current=45
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: numtests=57
+INSTRUMENTATION_STATUS: stream=
+Error in testWhenAContainerIsBoundWithAGalleryViewModel_theTheToolbarHidesWhenTapped(uk.co.bbc.mafsample.containertests.LightboxContainerTest):
+junit.framework.AssertionFailedError
+    at junit.framework.Assert.fail(Assert.java:48)
+    at junit.framework.Assert.assertTrue(Assert.java:20)
+    at junit.framework.Assert.assertTrue(Assert.java:27)
+    at uk.co.bbc.mafsample.containertests.LightboxContainerTest.testWhenAContainerIsBoundWithAGalleryViewModel_theTheToolbarHidesWhenTapped(LightboxContainerTest.java:72)
+    at java.lang.reflect.Method.invoke(Native Method)
+    at java.lang.reflect.Method.invoke(Method.java:372)
+    at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)
+    at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)
+    at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)
+    at junit.framework.TestCase.runBare(TestCase.java:134)
+    at junit.framework.TestResult$1.protect(TestResult.java:115)
+    at android.support.test.internal.runner.junit3.AndroidTestResult.runProtected(AndroidTestResult.java:77)
+    at junit.framework.TestResult.run(TestResult.java:118)
+    at android.support.test.internal.runner.junit3.AndroidTestResult.run(AndroidTestResult.java:55)
+    at junit.framework.TestCase.run(TestCase.java:124)
+    at android.support.test.internal.runner.junit3.NonLeakyTestSuite$NonLeakyTest.run(NonLeakyTestSuite.java:63)
+    at junit.framework.TestSuite.runTest(TestSuite.java:243)
+    at junit.framework.TestSuite.run(TestSuite.java:238)
+    at android.support.test.internal.runner.junit3.DelegatingTestSuite.run(DelegatingTestSuite.java:103)
+    at android.support.test.internal.runner.junit3.AndroidTestSuite.run(AndroidTestSuite.java:69)
+    at android.support.test.internal.runner.junit3.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+    at org.junit.runners.Suite.runChild(Suite.java:128)
+    at org.junit.runners.Suite.runChild(Suite.java:27)
+    at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+    at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+    at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+    at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+    at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+    at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+    at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+    at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+    at android.support.test.internal.runner.TestExecutor.execute(TestExecutor.java:54)
+    at android.support.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:240)
+    at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1889)
+
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: test=testWhenAContainerIsBoundWithAGalleryViewModel_theTheToolbarHidesWhenTapped
+INSTRUMENTATION_STATUS: class=uk.co.bbc.mafsample.containertests.LightboxContainerTest
+INSTRUMENTATION_STATUS: stack=junit.framework.AssertionFailedError
+    at junit.framework.Assert.fail(Assert.java:48)
+    at junit.framework.Assert.assertTrue(Assert.java:20)
+    at junit.framework.Assert.assertTrue(Assert.java:27)
+    at uk.co.bbc.mafsample.containertests.LightboxContainerTest.testWhenAContainerIsBoundWithAGalleryViewModel_theTheToolbarHidesWhenTapped(LightboxContainerTest.java:72)
+    at java.lang.reflect.Method.invoke(Native Method)
+    at java.lang.reflect.Method.invoke(Method.java:372)
+    at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)
+    at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)
+    at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)
+    at junit.framework.TestCase.runBare(TestCase.java:134)
+    at junit.framework.TestResult$1.protect(TestResult.java:115)
+    at android.support.test.internal.runner.junit3.AndroidTestResult.runProtected(AndroidTestResult.java:77)
+    at junit.framework.TestResult.run(TestResult.java:118)
+    at android.support.test.internal.runner.junit3.AndroidTestResult.run(AndroidTestResult.java:55)
+    at junit.framework.TestCase.run(TestCase.java:124)
+    at android.support.test.internal.runner.junit3.NonLeakyTestSuite$NonLeakyTest.run(NonLeakyTestSuite.java:63)
+    at junit.framework.TestSuite.runTest(TestSuite.java:243)
+    at junit.framework.TestSuite.run(TestSuite.java:238)
+    at android.support.test.internal.runner.junit3.DelegatingTestSuite.run(DelegatingTestSuite.java:103)
+    at android.support.test.internal.runner.junit3.AndroidTestSuite.run(AndroidTestSuite.java:69)
+    at android.support.test.internal.runner.junit3.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+    at org.junit.runners.Suite.runChild(Suite.java:128)
+    at org.junit.runners.Suite.runChild(Suite.java:27)
+    at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+    at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+    at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+    at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+    at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+    at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+    at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+    at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+    at android.support.test.internal.runner.TestExecutor.execute(TestExecutor.java:54)
+    at android.support.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:240)
+    at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1889)
+
+INSTRUMENTATION_STATUS: current=45
+INSTRUMENTATION_STATUS_CODE: -2
