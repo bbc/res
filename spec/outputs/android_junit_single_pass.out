@@ -1,0 +1,14 @@
+INSTRUMENTATION_STATUS: numtests=5
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: test=testPathToPlaybackFromHome[Orientation Portrait]
+INSTRUMENTATION_STATUS: class=uk.co.bbc.iplayer.kids.bdd.puma.PumaTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: numtests=5
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: test=testPathToPlaybackFromHome[Orientation Portrait]
+INSTRUMENTATION_STATUS: class=uk.co.bbc.iplayer.kids.bdd.puma.PumaTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS_CODE: 0
