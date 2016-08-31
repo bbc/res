@@ -21,6 +21,15 @@ module Res
         status = "failed"
         status = "passed" if ir.tests.count == ir.count(:passed)
 
+        if ir.values.has_key?('#type') && ir.values['#type'] == 'multiple'
+          measures = {}
+          ir.values.select { |k, v| k !~ /^[#_]/ }.each do |k, v|
+            measures[k] = { :count => v, :total => ir.values['_total'] }
+          end
+        else
+          measures = ir.values
+        end
+
         # Set Lion Data
         lion_data = {
           :app_name => config.app_name,
@@ -32,9 +41,8 @@ module Res
           :started => ir.results.first[:started],
           :finished => ir.results.last[:finished],
           :status => status,
-          :measures => ir.values
+          :measures => measures
         }
-        
         
         uri = URI.parse(config.url)
         @http = Net::HTTP.new(uri.host, uri.port)
