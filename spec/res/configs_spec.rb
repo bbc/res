@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'res/config'
 
 EXAMPLE_CONFIG_FILE = 'blah'

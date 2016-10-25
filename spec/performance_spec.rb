@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'res'
 
 CUCUMBER_COMMAND = "unset BUNDLE_GEMFILE; unset RUBYOPT; cd examples/cucumber; bundle exec cucumber"

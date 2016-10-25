@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'res/parsers/android_junit'
 require 'json'
 

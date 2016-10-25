@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'res'
 require 'res/reporters/test_rail'
 require 'json'
