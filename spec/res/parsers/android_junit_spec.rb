@@ -31,6 +31,9 @@ describe Res::Parsers::AndroidJunit do
     it 'returns the correct results when parsing an erroring test' do
       Res::Parsers::AndroidJunit.new(erroring_test)
       ir = Res::IR.load('instruments.res')
+      expect(ir.count(:passed)).to eq 0
+      expect(ir.count(:failed)).to eq 2
+      expect(ir.count(:unknown)).to eq 0
     end
 
   end

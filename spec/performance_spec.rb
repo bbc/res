@@ -6,7 +6,6 @@ TMP_FILE = "/tmp/#{rand(999999)}.res"
 
 describe "Reporting value data into IR using Res.perf_data" do
   it "adds key/value pairs into the IR output" do
-    `#{CUCUMBER_COMMAND} features/performance.feature -f Res::Formatters::RubyCucumber -o out.res`
     ir = Res::IR.load("examples/cucumber/out.res")
     expect(ir.tests.first).to have_key(:values)
     expect(ir.tests.first[:values]).to be_a Hash
