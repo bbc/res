@@ -29,8 +29,7 @@ module Res
         File.open(output) do |f|
           f.each_line do |line|
 
-            if line.include?('INSTRUMENTATION_STATUS_CODE')
-              if line.match('INSTRUMENTATION_STATUS_CODE: (.*)$')
+            if line.match('INSTRUMENTATION_STATUS_CODE: (.*)$')
                 case Regexp.last_match[1]
                   when '1'
                     # Skip if this is just the 'pre-run' test
@@ -42,7 +41,6 @@ module Res
                   else
                     test[:status] = 'unknown'
                 end
-              end
               result.last[:children] << test
               test = {
                 type: 'AndroidJUnit::Test',
