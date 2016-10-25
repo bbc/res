@@ -30,11 +30,18 @@ module Res
           f.each_line do |line|
 
             if line.include?('INSTRUMENTATION_STATUS_CODE')
-              # Skip if this is just the 'pre-run' test
-              if line.include?('INSTRUMENTATION_STATUS_CODE: 1')
-                next
-              elsif line.include?('INSTRUMENTATION_STATUS_CODE: 0')
-                test[:status] = 'passed'
+              if line.match('INSTRUMENTATION_STATUS_CODE: (.*)$')
+                case Regexp.last_match[1]
+                  when '1'
+                    # Skip if this is just the 'pre-run' test
+                    next
+                  when '0'
+                    test[:status] = 'passed'
+                  when '-2'
+                    test[:status] = 'failed'
+                  else
+                    test[:status] = 'unknown'
+                end
               end
               result.last[:children] << test
               test = {
