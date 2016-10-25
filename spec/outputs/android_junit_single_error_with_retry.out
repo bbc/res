@@ -1,0 +1,113 @@
+INSTRUMENTATION_STATUS: numtests=113
+INSTRUMENTATION_STATUS: stream=
+bbc.iplayer.android.bdd.deeplink.DeeplinkTest:
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: test=testGivenIDeepLinkIntoChannelsWithReferrer_ThenISeeChannelsScreen[Orientation Portrait]
+INSTRUMENTATION_STATUS: class=bbc.iplayer.android.bdd.deeplink.DeeplinkTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: numtests=113
+INSTRUMENTATION_STATUS: stream=
+Process crashed while executing testGivenIDeepLinkIntoChannelsWithReferrer_ThenISeeChannelsScreen[Orientation Portrait](bbc.iplayer.android.bdd.deeplink.DeeplinkTest):
+java.lang.NullPointerException: Attempt to invoke virtual method 'uk.co.bbc.cast.toolkit.CastButtonManager uk.co.bbc.cast.toolkit.CastManagerFactory.getCastButtonManager()' on a null object reference
+	at bbc.iplayer.android.app.IPlayerApp.getCastButtonManager(IPlayerApp.java:431)
+	at uk.co.bbc.iplayer.common.globalnav.menu.view.utility.CastItemViewButtonFactory.getItem(CastItemViewButtonFactory.java:22)
+	at uk.co.bbc.globalnav.menu.controller.ClosedMenuController.onReady(ClosedMenuController.java:52)
+	at uk.co.bbc.globalnav.GlobalNavActivity.onCreate(GlobalNavActivity.java:161)
+	at android.app.Activity.performCreate(Activity.java:6289)
+	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1119)
+	at android.support.test.runner.MonitoringInstrumentation.callActivityOnCreate(MonitoringInstrumentation.java:494)
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2655)
+	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2767)
+	at android.app.ActivityThread.access$900(ActivityThread.java:177)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1449)
+	at android.os.Handler.dispatchMessage(Handler.java:102)
+	at android.os.Looper.loop(Looper.java:145)
+	at android.app.ActivityThread.main(ActivityThread.java:5951)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at java.lang.reflect.Method.invoke(Method.java:372)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1400)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1195)
+
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: test=testGivenIDeepLinkIntoChannelsWithReferrer_ThenISeeChannelsScreen[Orientation Portrait]
+INSTRUMENTATION_STATUS: class=bbc.iplayer.android.bdd.deeplink.DeeplinkTest
+INSTRUMENTATION_STATUS: stack=java.lang.NullPointerException: Attempt to invoke virtual method 'uk.co.bbc.cast.toolkit.CastButtonManager uk.co.bbc.cast.toolkit.CastManagerFactory.getCastButtonManager()' on a null object reference
+	at bbc.iplayer.android.app.IPlayerApp.getCastButtonManager(IPlayerApp.java:431)
+	at uk.co.bbc.iplayer.common.globalnav.menu.view.utility.CastItemViewButtonFactory.getItem(CastItemViewButtonFactory.java:22)
+	at uk.co.bbc.globalnav.menu.controller.ClosedMenuController.onReady(ClosedMenuController.java:52)
+	at uk.co.bbc.globalnav.GlobalNavActivity.onCreate(GlobalNavActivity.java:161)
+	at android.app.Activity.performCreate(Activity.java:6289)
+	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1119)
+	at android.support.test.runner.MonitoringInstrumentation.callActivityOnCreate(MonitoringInstrumentation.java:494)
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2655)
+	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2767)
+	at android.app.ActivityThread.access$900(ActivityThread.java:177)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1449)
+	at android.os.Handler.dispatchMessage(Handler.java:102)
+	at android.os.Looper.loop(Looper.java:145)
+	at android.app.ActivityThread.main(ActivityThread.java:5951)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at java.lang.reflect.Method.invoke(Method.java:372)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1400)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1195)
+
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: numtests=113
+INSTRUMENTATION_STATUS: stream=
+Process crashed while executing testGivenIDeepLinkIntoChannelsWithReferrer_ThenISeeChannelsScreen[Orientation Portrait](bbc.iplayer.android.bdd.deeplink.DeeplinkTest):
+java.lang.RuntimeException: Unable to start activity ComponentInfo{bbc.iplayer.android/uk.co.bbc.globalnav.GlobalNavActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'uk.co.bbc.cast.toolkit.CastButtonManager uk.co.bbc.cast.toolkit.CastManagerFactory.getCastButtonManager()' on a null object reference
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2702)
+	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2767)
+	at android.app.ActivityThread.access$900(ActivityThread.java:177)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1449)
+	at android.os.Handler.dispatchMessage(Handler.java:102)
+	at android.os.Looper.loop(Looper.java:145)
+	at android.app.ActivityThread.main(ActivityThread.java:5951)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at java.lang.reflect.Method.invoke(Method.java:372)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1400)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1195)
+Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'uk.co.bbc.cast.toolkit.CastButtonManager uk.co.bbc.cast.toolkit.CastManagerFactory.getCastButtonManager()' on a null object reference
+	at bbc.iplayer.android.app.IPlayerApp.getCastButtonManager(IPlayerApp.java:431)
+	at uk.co.bbc.iplayer.common.globalnav.menu.view.utility.CastItemViewButtonFactory.getItem(CastItemViewButtonFactory.java:22)
+	at uk.co.bbc.globalnav.menu.controller.ClosedMenuController.onReady(ClosedMenuController.java:52)
+	at uk.co.bbc.globalnav.GlobalNavActivity.onCreate(GlobalNavActivity.java:161)
+	at android.app.Activity.performCreate(Activity.java:6289)
+	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1119)
+	at android.support.test.runner.MonitoringInstrumentation.callActivityOnCreate(MonitoringInstrumentation.java:494)
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2655)
+	... 10 more
+
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: test=testGivenIDeepLinkIntoChannelsWithReferrer_ThenISeeChannelsScreen[Orientation Portrait]
+INSTRUMENTATION_STATUS: class=bbc.iplayer.android.bdd.deeplink.DeeplinkTest
+INSTRUMENTATION_STATUS: stack=java.lang.RuntimeException: Unable to start activity ComponentInfo{bbc.iplayer.android/uk.co.bbc.globalnav.GlobalNavActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'uk.co.bbc.cast.toolkit.CastButtonManager uk.co.bbc.cast.toolkit.CastManagerFactory.getCastButtonManager()' on a null object reference
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2702)
+	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2767)
+	at android.app.ActivityThread.access$900(ActivityThread.java:177)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1449)
+	at android.os.Handler.dispatchMessage(Handler.java:102)
+	at android.os.Looper.loop(Looper.java:145)
+	at android.app.ActivityThread.main(ActivityThread.java:5951)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at java.lang.reflect.Method.invoke(Method.java:372)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1400)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1195)
+Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'uk.co.bbc.cast.toolkit.CastButtonManager uk.co.bbc.cast.toolkit.CastManagerFactory.getCastButtonManager()' on a null object reference
+	at bbc.iplayer.android.app.IPlayerApp.getCastButtonManager(IPlayerApp.java:431)
+	at uk.co.bbc.iplayer.common.globalnav.menu.view.utility.CastItemViewButtonFactory.getItem(CastItemViewButtonFactory.java:22)
+	at uk.co.bbc.globalnav.menu.controller.ClosedMenuController.onReady(ClosedMenuController.java:52)
+	at uk.co.bbc.globalnav.GlobalNavActivity.onCreate(GlobalNavActivity.java:161)
+	at android.app.Activity.performCreate(Activity.java:6289)
+	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1119)
+	at android.support.test.runner.MonitoringInstrumentation.callActivityOnCreate(MonitoringInstrumentation.java:494)
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2655)
+	... 10 more
+
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: shortMsg=java.lang.NullPointerException
+INSTRUMENTATION_RESULT: longMsg=java.lang.NullPointerException: Attempt to invoke virtual method 'uk.co.bbc.cast.toolkit.CastButtonManager uk.co.bbc.cast.toolkit.CastManagerFactory.getCastButtonManager()' on a null object reference
+INSTRUMENTATION_CODE: 0

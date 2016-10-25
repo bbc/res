@@ -23,22 +23,29 @@ module Res
         test = {
           type: 'AndroidJUnit::Test',
           name: 'UNKNOWN',
-          status: 'passed'
+          status: 'unknown'
         }
 
         File.open(output) do |f|
           f.each_line do |line|
 
-            if line.include?('INSTRUMENTATION_STATUS_CODE')
-              # Skip if this is just the 'pre-run' test
-              if line.include?('INSTRUMENTATION_STATUS_CODE: 1')
-                next
-              end
+            if line.match('INSTRUMENTATION_STATUS_CODE: (.*)$')
+                case Regexp.last_match[1]
+                  when '1'
+                    # Skip if this is just the 'pre-run' test
+                    next
+                  when '0'
+                    test[:status] = 'passed'
+                  when '-2'
+                    test[:status] = 'failed'
+                  else
+                    test[:status] = 'unknown'
+                end
               result.last[:children] << test
               test = {
                 type: 'AndroidJUnit::Test',
                 name: 'UNKNOWN',
-                status: 'passed'
+                status: 'unknown'
               }
             end
 

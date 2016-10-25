@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+  - 2.2
+
+script: bundle exec rspec
+
+addons:
+  code_climate:
+    repo_token:
+      secure: "RVQQiP/XbDiRw9ui+YxqparfdlnUfNG5jLzkea4OPVzQNEhex1jRxCAp6wrzB++7yhOhU9t9Ln7zg5mehUNJYyimETUk6zZllbnpno1VKKrJgC+Az99/+60Z1xlChxIiHd3H2Q7zELxna+oCyzdzJPg0skRzmcVrNivm5UwtrA7zvBfqXXfQ/kbzmkBdAskxwUISUK4O1vkyIZvGuNsH8JGDdhS20yvzrX90p6zxfO2UbUMEgaI+yZbhFacpFu+h8NehwCSrThJct4akis7MwMvB3e+M8NIncaLAZMjKBvJ3LslYNetbIGK6Z1g1tcLHICZ9ceJQC6ivEB5oVyUVGenllXzwGTXv9h3OPR8AfdsaLq42klmKf2Qm9WHKivnLhqEilpadHzDES1DPulwV/L7U+xPAYoFhYXtjtixELAWlH0UZZeA0gsTKJydrwtwlVgMRCj1vgPa3ol2rfb772DlLudTJ0dOwyg+fUpi3UjCcm4+vLD6XfngOpt6NVeE8Y/qZ/9lxpZsBkOwSlNzn+GKfU4fPHIpWT8CjapJlZl0TkYoegrX9XXBLnxJSRpjX7Tx889NNPxVrLURgJrnvNzEm/lghCVfNoJHAqdlsQNsOx9HtOI2IZ1zAwvl0YSIvwQemhYs1LFmGDhrXy1/HJdXjik7U7Vu9Yi5XdnZFtC0="
