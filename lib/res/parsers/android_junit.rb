@@ -23,7 +23,7 @@ module Res
         test = {
           type: 'AndroidJUnit::Test',
           name: 'UNKNOWN',
-          status: 'passed'
+          status: 'unknown'
         }
 
         File.open(output) do |f|
@@ -33,12 +33,14 @@ module Res
               # Skip if this is just the 'pre-run' test
               if line.include?('INSTRUMENTATION_STATUS_CODE: 1')
                 next
+              elsif line.include?('INSTRUMENTATION_STATUS_CODE: 0')
+                test[:status] = 'passed'
               end
               result.last[:children] << test
               test = {
                 type: 'AndroidJUnit::Test',
                 name: 'UNKNOWN',
-                status: 'passed'
+                status: 'unknown'
               }
             end
 
