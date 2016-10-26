@@ -20,6 +20,7 @@ module Res
       def submit_results(ir, args = nil)
         status = "failed"
         status = "passed" if ir.tests.count == ir.count(:passed)
+        results = Hash[ir.tests.map { |t| [t[:name], t[:status]] }]
 
         if ir.values.has_key?('#type') && ir.values['#type'] == 'multiple'
           measures = {}
@@ -41,6 +42,7 @@ module Res
           :started => ir.results.first[:started],
           :finished => ir.results.last[:finished],
           :status => status,
+          :results => results,
           :measures => measures
         }
         
