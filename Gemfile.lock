@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    res (1.2.14)
+    res (1.2.15)
       hive-messages (~> 1)
       json (~> 1.8)
       ox (~> 2.2)
@@ -93,4 +93,4 @@ DEPENDENCIES
   rspec (~> 3.2)
 
 BUNDLED WITH
-   1.13.2
+   1.13.3
