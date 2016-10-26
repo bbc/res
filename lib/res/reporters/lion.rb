@@ -41,6 +41,7 @@ module Res
           :started => ir.results.first[:started],
           :finished => ir.results.last[:finished],
           :status => status,
+          :results => Hash[ir.tests.map { |t| [t[:name], t[:status]] }],
           :measures => measures
         }
         
