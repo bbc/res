@@ -30,7 +30,7 @@ module Res
           f.each_line do |line|
 
             if line.match('INSTRUMENTATION_STATUS_CODE: (.*)$')
-                case Regexp.last_match[1]
+                case Regexp.last_match[1].strip
                   when '1'
                     # Skip if this is just the 'pre-run' test
                     next
