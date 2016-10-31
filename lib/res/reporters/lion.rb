@@ -12,7 +12,7 @@ module Res
         # At the next major version update this should be moved into the
         # required list.
         @config = Res::Config.new([:url, :tag, :description, :app_name, :target],
-                                  :optional => [:hive_job_id, :queue, :cert, :cacert, :ssl_verify_mode, :device_type, :version],
+                                  :optional => [:hive_job_id, :hive_batch_id, :queue, :cert, :cacert, :ssl_verify_mode, :device_type, :version],
                                   :pre_env  => 'LION_')
         config.process(args)
       end
@@ -36,6 +36,7 @@ module Res
           :app_name => config.app_name,
           :version => config.version,
           :hive_job_id => config.hive_job_id,
+          :hive_batch_id => config.hive_batch_id,
           :tag => config.tag,
           :device_type => config.device_type || 'Unknown',
           :description => config.description,
