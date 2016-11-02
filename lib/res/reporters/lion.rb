@@ -12,7 +12,7 @@ module Res
         # At the next major version update this should be moved into the
         # required list.
         @config = Res::Config.new([:url, :tag, :description, :app_name, :target],
-                                  :optional => [:hive_job_id, :queue, :cert, :cacert, :ssl_verify_mode, :device_type],
+                                  :optional => [:hive_job_id, :queue, :cert, :cacert, :ssl_verify_mode, :device_type, :version],
                                   :pre_env  => 'LION_')
         config.process(args)
       end
@@ -34,6 +34,8 @@ module Res
         # Set Lion Data
         lion_data = {
           :app_name => config.app_name,
+          :app_version => config.version || 'Unknown',
+          :hive_job_id => config.hive_job_id || 0,
           :tag => config.tag,
           :device_type => config.device_type || 'Unknown',
           :description => config.description,
