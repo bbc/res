@@ -1,4 +1,5 @@
 # Res
+[![Build Status](https://travis-ci.org/bbc/res.svg?branch=master)](https://travis-ci.org/bbc/res)
 
 Res is a collection of formatting tools for making test 
 result reporting easier and more consistent. The concept is that 
