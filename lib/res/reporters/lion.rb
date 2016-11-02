@@ -34,8 +34,8 @@ module Res
         # Set Lion Data
         lion_data = {
           :app_name => config.app_name,
-          :app_version => config.version,
-          :hive_job_id => config.hive_job_id,
+          :app_version => config.version || 'Unknown',
+          :hive_job_id => config.hive_job_id || 0,
           :tag => config.tag,
           :device_type => config.device_type || 'Unknown',
           :description => config.description,
