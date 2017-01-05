@@ -8,8 +8,8 @@ module Res
 
       def initialize(args)
         @url = args[:url]
-        @config = Res::Config.new([:project, :component, :suite, :version, :url, :target],
-                                  :optional => [:hive_job_id],
+        @config = Res::Config.new([:project, :component, :suite, :url],
+                                  :optional => [:hive_job_id, :version, :target, :cert, :cacert, :ssl_verify_mode],
                                   :pre_env  => 'TESTMINE_')
         config.process(args)
       end
@@ -29,18 +29,23 @@ module Res
         }
 
         # Submit to testmine
+
         uri = URI.parse(config.url)
-        net = Net::HTTP.new(uri.host, uri.port)
-        request = Net::HTTP::Post.new("/api/v1/submit")
-        request.set_form_data({"data" => ir.to_json})
-        net.read_timeout = 60
-        net.open_timeout = 10
-        
-        response = net.start do |http|
-          http.request(request)
+        @http = Net::HTTP.new(uri.host, uri.port)
+        if config.cert
+          pem = File.read(config.cert)
+          @http.use_ssl = true if uri.scheme == 'https'
+          @http.cert = OpenSSL::X509::Certificate.new(pem)
+          @http.key = OpenSSL::PKey::RSA.new(pem)
+          @http.ca_file = config.cacert if config.cacert
+          @http.verify_mode = config.ssl_verify_mode if config.ssl_verify_mode
         end
         
-        response.read_body
+        request = Net::HTTP::Post.new(config.url + "/api/v1/submit")
+        request.content_type = 'application/json'
+        request.set_form_data({"data" => ir.to_json})
+        @http.request(request)
+
       end
 
     end

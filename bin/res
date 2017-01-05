@@ -149,13 +149,17 @@ if options.reporter
 
       reporter = Res::Reporters::Testmine.new(
           :config_file => options.config_file,
-          :version     => options.version,
+          :url         => options.url,
+          :cert        => options.cert,
+          :cacert      => options.cacert,
           :target      => options.target,
-          :url         => options.url
+          :ssl_verify_mode => options.ssl_verify_mode,
+          :ir          => ir
       )
 
       id = reporter.submit_results(ir)
       puts "Reported to testmine: #{id}"
+
     when 'testrail'
       reporter = Res::Reporters::TestRail.new(
           :config_file => options.config_file,
@@ -166,6 +170,7 @@ if options.reporter
 
       output = reporter.submit_results(ir)
       puts output
+
     when 'lion'
       reporter = Res::Reporters::Lion.new(
           :config_file => options.config_file,
