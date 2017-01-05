@@ -30,7 +30,7 @@ module Res
 
         # Submit to testmine
 
-				uri = URI.parse(config.url)
+        uri = URI.parse(config.url)
         @http = Net::HTTP.new(uri.host, uri.port)
         if config.cert
           pem = File.read(config.cert)
