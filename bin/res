@@ -152,6 +152,7 @@ if options.reporter
           :url              => options.url,
           :cert             => options.cert,
           :cacert           => options.cacert,
+          :version          => options.version,
           :target           => options.target,
           :hive_job_id      => options.job_id,
           :ssl_verify_mode  => options.ssl_verify_mode,

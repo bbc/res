@@ -8,8 +8,8 @@ module Res
 
       def initialize(args)
         @url = args[:url]
-        @config = Res::Config.new([:project, :component, :suite, :url],
-                                  :optional => [:hive_job_id, :version, :target, :cert, :cacert, :ssl_verify_mode],
+        @config = Res::Config.new([:project, :component, :suite, :url, :target, :version],
+                                  :optional => [:hive_job_id, :cert, :cacert, :ssl_verify_mode],
                                   :pre_env  => 'TESTMINE_')
         config.process(args)
       end
@@ -44,8 +44,8 @@ module Res
         request = Net::HTTP::Post.new(config.url + "/api/v1/submit")
         request.content_type = 'application/json'
         request.set_form_data({"data" => ir.to_json})
-        @http.request(request)
-
+        response = @http.request(request)
+        response.body
       end
 
     end
