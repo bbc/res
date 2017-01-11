@@ -22,10 +22,13 @@ module Res
         ir.hive_job_id = config.hive_job_id 
         
         # Load world information into json hash
+       
+        world_version = (defined? config.version) ? config.version : @config.version
+
         ir.world = {
           :project   => @config.project,
           :component => @config.component,
-          :version   => @config.version,
+          :version   => world_version
         }
 
         # Submit to testmine
