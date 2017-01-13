@@ -92,7 +92,7 @@ require you to sync your test definitions before you submit a run.
 You need to create a project file in the root of your test code, the file 
 should be called .testmine.yaml, and should look like this:
 
-    testmine_url: 'mytestmineinstance.bbc.co.uk'
+    url: 'mytestmineinstance.bbc.co.uk'
     authentication: 'authenticationkey'
     project:   'MyProjectName'
     component: 'Android acceptance'
