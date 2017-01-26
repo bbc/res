@@ -21,6 +21,7 @@ module Res
         test_complete = false
         total_tests = 0
         passed = 0
+        failed = 0
         class_name = []
         result = []
         test = {
