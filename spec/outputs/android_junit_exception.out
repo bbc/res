@@ -1,0 +1,129 @@
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: numtests=9
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: test=testWorkDoneOnDifferentThread
+INSTRUMENTATION_STATUS: class=bbc.co.uk.mobiledrm.v3.initialise.AsyncInitialiseTests
+INSTRUMENTATION_STATUS: current=9
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 0.146
+There were 3 failures:
+1) a.c.c.d.e.f.class
+java.lang.ClassNotFoundException: a.c.c.d.e.f.class
+	at java.lang.Class.classForName(Native Method)
+	at java.lang.Class.forName(Class.java:324)
+	at android.support.test.internal.runner.TestLoader.doLoadClass(TestLoader.java:92)
+	at android.support.test.internal.runner.TestLoader.loadIfTest(TestLoader.java:113)
+	at android.support.test.internal.runner.TestRequestBuilder.loadClassesFromClassPath(TestRequestBuilder.java:801)
+	at android.support.test.internal.runner.TestRequestBuilder.build(TestRequestBuilder.java:747)
+	at android.support.test.runner.AndroidJUnitRunner.buildRequest(AndroidJUnitRunner.java:354)
+	at android.support.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:260)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1959)
+Caused by: java.lang.ClassNotFoundException: Didn't find class "a.c.c.d.e.f.class" on path: DexPathList
+	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+	... 9 more
+	Suppressed: java.lang.NoClassDefFoundError: a.c.c.d.e.f.class
+		at dalvik.system.DexFile.defineClassNative(Native Method)
+		at dalvik.system.DexFile.defineClass(DexFile.java:226)
+		at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+		at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+		... 11 more
+	Suppressed: java.lang.NoClassDefFoundError: a.c.c.d.e.f.class
+		at dalvik.system.DexFile.defineClassNative(Native Method)
+		at dalvik.system.DexFile.defineClass(DexFile.java:226)
+		at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+		at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+		... 11 more
+	Suppressed: java.lang.ClassNotFoundException: a.c.c.d.e.f.class
+		at java.lang.Class.classForName(Native Method)
+		at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+		at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+		... 10 more
+	Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+2) a.c.c.d.e.f.class2
+java.lang.ClassNotFoundException: a.c.c.d.e.f.class2
+	at java.lang.Class.classForName(Native Method)
+	at java.lang.Class.forName(Class.java:324)
+	at android.support.test.internal.runner.TestLoader.doLoadClass(TestLoader.java:92)
+	at android.support.test.internal.runner.TestLoader.loadIfTest(TestLoader.java:113)
+	at android.support.test.internal.runner.TestRequestBuilder.loadClassesFromClassPath(TestRequestBuilder.java:801)
+	at android.support.test.internal.runner.TestRequestBuilder.build(TestRequestBuilder.java:747)
+	at android.support.test.runner.AndroidJUnitRunner.buildRequest(AndroidJUnitRunner.java:354)
+	at android.support.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:260)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1959)
+Caused by: java.lang.ClassNotFoundException: Didn't find class "a.c.c.d.e.f.class2" 
+	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+	... 9 more
+	Suppressed: java.lang.NoClassDefFoundError: a.c.c.d.e.f.class2
+		at dalvik.system.DexFile.defineClassNative(Native Method)
+		at dalvik.system.DexFile.defineClass(DexFile.java:226)
+		at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+		at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+		... 11 more
+	Suppressed: java.lang.NoClassDefFoundError: a.c.c.d.e.f.class2
+		at dalvik.system.DexFile.defineClassNative(Native Method)
+		at dalvik.system.DexFile.defineClass(DexFile.java:226)
+		at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+		at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+		... 11 more
+	Suppressed: java.lang.ClassNotFoundException: a.c.c.d.e.f.class2
+		at java.lang.Class.classForName(Native Method)
+		at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+		at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+		... 10 more
+	Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+3) a.c.c.d.e.f.class3
+java.lang.ClassNotFoundException: a.c.c.d.e.f.class3
+	at java.lang.Class.classForName(Native Method)
+	at java.lang.Class.forName(Class.java:324)
+	at android.support.test.internal.runner.TestLoader.doLoadClass(TestLoader.java:92)
+	at android.support.test.internal.runner.TestLoader.loadIfTest(TestLoader.java:113)
+	at android.support.test.internal.runner.TestRequestBuilder.loadClassesFromClassPath(TestRequestBuilder.java:801)
+	at android.support.test.internal.runner.TestRequestBuilder.build(TestRequestBuilder.java:747)
+	at android.support.test.runner.AndroidJUnitRunner.buildRequest(AndroidJUnitRunner.java:354)
+	at android.support.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:260)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1959)
+Caused by: java.lang.ClassNotFoundException: Didn't find class "a.c.c.d.e.f.class3" 
+	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+	... 9 more
+	Suppressed: java.lang.NoClassDefFoundError: a.c.c.d.e.f.class3
+		at dalvik.system.DexFile.defineClassNative(Native Method)
+		at dalvik.system.DexFile.defineClass(DexFile.java:226)
+		at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+		at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+		... 11 more
+	Suppressed: java.lang.NoClassDefFoundError: a.c.c.d.e.f.class3
+		at dalvik.system.DexFile.defineClassNative(Native Method)
+		at dalvik.system.DexFile.defineClass(DexFile.java:226)
+		at dalvik.system.DexFile.loadClassBinaryName(DexFile.java:219)
+		at dalvik.system.DexPathList.findClass(DexPathList.java:338)
+		at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:54)
+		... 11 more
+	Suppressed: java.lang.ClassNotFoundException: a.c.c.d.e.f.class3
+		at java.lang.Class.classForName(Native Method)
+		at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+		at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+		at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+		... 10 more
+	Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+
+FAILURES!!!
+Tests run: 9,  Failures: 3
+
+
+INSTRUMENTATION_CODE: -1
