@@ -38,11 +38,12 @@ describe Res::Parsers::AndroidJunit do
       expect(ir.count(:unknown)).to eq 0
     end
 
-    it 'reports the correct results when parsing test with exceptions' do
+    it 'reports the result as failure when parsing test with exceptions' do
       Res::Parsers::AndroidJunit.new(exception_test)
       ir = Res::IR.load('instruments.res')
       expect(ir.count(:passed)).to eq 1
-      expect(ir.count(:failed)).to eq 0
+      expect(ir.count(:failed)).to eq 1
+      expect(ir.count(:unknown)).to eq 0
       expect(ir.results.last[:type]).to eq "AndroidJUnit::Exception"
     end
 

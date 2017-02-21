@@ -83,7 +83,7 @@ module Res
                   result << {
                     type: 'AndroidJUnit::Exception',
                     name: 'Exception(s): Check in logs for more info',
-                    status: 'UNKNOWN'
+                    status: 'failed'
                   }
                 end
               end
