@@ -48,10 +48,13 @@ module Res
                       passed += 1
                     when '-2'
                       test[:status] = 'failed'
+                    when '-3'
+                      # Ignored (skipped) test
+                      test[:status] = 'ignored'
                     else
                       test[:status] = 'unknown'
                   end
-                result.last[:children] << test
+                result.last[:children] << test if test[:status] != 'ignored'
                 test = {
                   type: 'AndroidJUnit::Test',
                   name: 'UNKNOWN',
