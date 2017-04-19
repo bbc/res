@@ -94,7 +94,6 @@ DEPENDENCIES
   codeclimate-test-reporter
   res!
   rspec (~> 3.2)
-  test_rail-api
 
 BUNDLED WITH
    1.14.6
