@@ -81,8 +81,9 @@ Your config file should be called .test_rail.yaml, and should look like this:
     project:   'MyProjectName'
     suite:     'MySuite'
     run_name:  'RunName' or run_id:    '1234'
+    plan_name: 'PlanName'
 
-Note: Above parameters can also be set through environment as TESTRAIL_#{PARAMETER} instead of config file.
+Note: Above parameters can also be set through environment as TESTRAIL_#{PARAMETER} instead of config file. `plan_name` is optional.
 
 ### Testmine 
 

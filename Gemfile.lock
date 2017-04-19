@@ -1,11 +1,11 @@
 PATH
   remote: .
   specs:
-    res (1.2.20)
+    res (1.2.21)
       hive-messages (~> 1)
       json (~> 1.8)
       ox (~> 2.2)
-      test_rail-api (~> 0.4)
+      test_rail-api (~> 0.4.1)
 
 GEM
   remote: https://rubygems.org/
@@ -23,8 +23,8 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     builder (3.2.3)
-    codeclimate-test-reporter (1.0.5)
-      simplecov
+    codeclimate-test-reporter (1.0.8)
+      simplecov (<= 0.13)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     declarative (0.0.9)
@@ -49,8 +49,8 @@ GEM
     minitest (5.10.1)
     multi_json (1.12.1)
     multipart-post (2.0.0)
-    ox (2.4.9)
-    representable (3.0.3)
+    ox (2.4.12)
+    representable (3.0.4)
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
@@ -74,11 +74,11 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
-    test_rail-api (0.4.0)
+    test_rail-api (0.4.1)
       json (~> 1.0)
       virtus (~> 1.0)
     thread_safe (0.3.6)
-    tzinfo (1.2.2)
+    tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uber (0.1.0)
     virtus (1.0.5)
@@ -96,4 +96,4 @@ DEPENDENCIES
   rspec (~> 3.2)
 
 BUNDLED WITH
-   1.14.3
+   1.14.6

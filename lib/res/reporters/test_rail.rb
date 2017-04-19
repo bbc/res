@@ -10,7 +10,7 @@ module Res
       attr_accessor :ir, :case_status, :config, :project, :suite
       def initialize(args)
         @url = args[:url]
-        @config = Res::Config.new([:user, :password, :namespace, :project, :suite], :optional => [:run_id, :run_name], :pre_env => 'testrail_')
+        @config = Res::Config.new([:user, :password, :namespace, :project, :suite], :optional => [:plan_name, :run_id, :run_name], :pre_env => 'testrail_')
         config.process(args)
 
         @case_status = {}
@@ -53,13 +53,20 @@ module Res
         sync_tests(ir) if !@synced
         suite = @project.find_suite(:name => @suite_name)
 
+        plan_name = @config.plan_name || args[:plan_name] || nil
         run_name = @config.run_name || args[:run_name] || nil
         run_id = @config.run_id || args[:run_id] || nil
-
+        
         if !run_name.nil? 
           run_name = @config.run_name 
           @io.puts "> Created new run with name #{run_name}"
-          run_id = @tr.add_run( :project_id => @project.id, :name => run_name, :description => args[:run_description], :suite_id => suite.id ).id
+
+          if plan_name
+            plan  = @project.find_or_create_plan(:name => plan_name, :id => @project.id)
+            run_id = @tr.add_run_in_plan(:project_id => @project.id, :plan_id => plan.id, :name => run_name, :description => args[:run_description], :suite_id => suite.id).id
+          else
+            run_id = @tr.add_run( :project_id => @project.id, :name => run_name, :description => args[:run_description], :suite_id => suite.id ).id
+          end
           @io.puts "> Created new run: #{run_id}"
         
         elsif !run_id.nil? 
