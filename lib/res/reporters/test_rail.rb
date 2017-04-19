@@ -54,7 +54,6 @@ module Res
         suite = @project.find_suite(:name => @suite_name)
 
         plan_name = @config.plan_name || args[:plan_name] || nil
-        plan_id = @config.plan_id || args[:plan_id] || nil
         run_name = @config.run_name || args[:run_name] || nil
         run_id = @config.run_id || args[:run_id] || nil
         
