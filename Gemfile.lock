@@ -1,11 +1,19 @@
+GIT
+  remote: git@github.com:bbc/test_rail-api.git
+  revision: dfe77eda5295f16ade3d676fe779470adb5176f9
+  specs:
+    test_rail-api (0.4.1)
+      json (~> 1.0)
+      virtus (~> 1.0)
+
 PATH
   remote: .
   specs:
-    res (1.2.20)
+    res (1.2.21)
       hive-messages (~> 1)
       json (~> 1.8)
       ox (~> 2.2)
-      test_rail-api (~> 0.4)
+      test_rail-api (~> 0.4.1)
 
 GEM
   remote: https://rubygems.org/
@@ -49,8 +57,8 @@ GEM
     minitest (5.10.1)
     multi_json (1.12.1)
     multipart-post (2.0.0)
-    ox (2.4.9)
-    representable (3.0.3)
+    ox (2.4.12)
+    representable (3.0.4)
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
@@ -74,11 +82,8 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
-    test_rail-api (0.4.0)
-      json (~> 1.0)
-      virtus (~> 1.0)
     thread_safe (0.3.6)
-    tzinfo (1.2.2)
+    tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uber (0.1.0)
     virtus (1.0.5)
@@ -94,6 +99,7 @@ DEPENDENCIES
   codeclimate-test-reporter
   res!
   rspec (~> 3.2)
+  test_rail-api!
 
 BUNDLED WITH
-   1.14.3
+   1.14.6
