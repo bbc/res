@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    res (1.2.21)
+    res (1.2.22)
       hive-messages (~> 1)
       json (~> 1.8)
       ox (~> 2.2)
