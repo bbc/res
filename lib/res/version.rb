@@ -1,3 +1,3 @@
 module Res
-  VERSION = '1.2.21'
+  VERSION = '1.2.22'
 end
