@@ -97,7 +97,7 @@ module Res
     # Recursive function for retrieving test nodes
     def self.find_tests(nodes)
       tests = []
-      nodes.each do |n|
+      nodes.compact.each do |n|
         if IR.is_a_test?(n)
           tests << n
         elsif n[:children]
