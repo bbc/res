@@ -47,16 +47,18 @@ module Res
           if node.value == 'testcase'
             suite[index] = Hash.new
             suite[index] = attach_cases(node)
-          else 
-            suite[index] = Hash.new
-            suite[index]['type'] = "JUnit::#{node.value}"
-            suite[index]['name'] = node.attributes[:name]
-            suite[index]['classname'] = node.attributes[:classname] if suite[index]['classname'] != nil
-            suite[index]['children'] = attach_suite(node)
+          else
+            if node.respond_to?(:attributes) and node.respond_to?(:value) 
+              suite[index] = Hash.new
+              suite[index]['type'] = "JUnit::#{node.value}"
+              suite[index]['name'] = node.attributes[:name]
+              suite[index]['classname'] = node.attributes[:classname] if suite[index]['classname'] != nil
+              suite[index]['children'] = attach_suite(node)
+            end
           end # if 
         index += 1
         end # each
-        suite
+        suite.compact
       end # def attach_suite
     end # class JUnit 
   end # class Parsers

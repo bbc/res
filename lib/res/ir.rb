@@ -83,7 +83,7 @@ module Res
     # Recursive function for retrieving values in nodes
     def self.find_values(nodes)
       value_hashes = []
-      nodes.each do |n|
+      nodes.compact.each do |n|
         if n[:values]
           value_hashes << n[:values]
         end
@@ -97,7 +97,7 @@ module Res
     # Recursive function for retrieving test nodes
     def self.find_tests(nodes)
       tests = []
-      nodes.each do |n|
+      nodes.compact.each do |n|
         if IR.is_a_test?(n)
           tests << n
         elsif n[:children]
