@@ -58,7 +58,7 @@ module Res
           end # if 
         index += 1
         end # each
-        suite
+        suite.compact
       end # def attach_suite
     end # class JUnit 
   end # class Parsers
