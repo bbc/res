@@ -40,3 +40,4 @@ examples/cucumber/cucumber.res
 .testmine.y*ml
 .test_rail_reporter.log
 junit.res
+instruments.res
