@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.add_runtime_dependency 'json', '~> 1.8'
   s.add_runtime_dependency 'test_rail-api', '~> 0.4.1'
-  s.add_runtime_dependency 'ox', '~> 2.2'
+  s.add_runtime_dependency 'ox', '~> 2.9.4'
   s.add_runtime_dependency 'hive-messages', '~> 1'
   s.add_development_dependency 'rspec', '~>3.2'
 end
